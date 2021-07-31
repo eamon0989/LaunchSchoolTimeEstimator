@@ -30,22 +30,25 @@
 <style>
   html {
     display: grid;
-    grid: 1fr 1fr 1fr;
+    grid-template-columns: 1fr min(80ch, 100%) 1fr;
+    font-size: 20px;
 
   }
 
   body {
   display: grid;
   grid-column: 2;
-  font-size: 25;
   place-items: center;
   } 
+
+  h1 {
+    font-size: 30px;
+  }
 
   #mainbody {
     display: grid;
     /* grid-column: 2; */
     margin: auto;
-    font-size: 20px;
   }
 </style>
 
@@ -80,11 +83,19 @@ function getHoursPerWeek() {
   getTotalHoursDone();
   let total = average.Backend - done;
   console.log(total, done, hours);
+  
+  let div = document.createElement('div');
   let estimate = document.createTextNode(`It will take you ${
     Math.round(total / hours)
-      } weeks to finish the backend part of core based on your current progress.
-      Based on the average it will take you another ${total} hours.`);
-  document.getElementById('body').appendChild(estimate);
+      } weeks to finish the backend part of core based on your current progress.`);
+  document.getElementById('body').appendChild(div);
+  div.appendChild(estimate);
+
+
+  let div2 = document.createElement('div');
+  document.getElementById('body').appendChild(div2);
+  let left = document.createTextNode(`Based on the average it will take you another ${total} hours.`);
+  div2.appendChild(left);
 }
 
 
