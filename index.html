@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Launch School time estimate</title>
+</head>
+<body id="body">
+  <h1>Check how long it will take you to finish core based on the average figures from the forum</h1>
+  
+  <div id="mainbody">
+    <div>
+      <label for="hoursperweek">How many hours do you study per week?:</label>
+      <input type="hoursperweek" id="hoursperweek" name="hoursperweek" required
+         minlength="1" size="10">
+    </div>
+    <div>
+      <label for="hoursdone">How many hours have you done already?:</label>
+      <input type="hoursdone" id="hoursdone" name="hoursdone">
+      <button onclick="getHoursPerWeek()">Submit</button>
+    </div>
+    <div>
+      <ul id="list">
+      </ul>
+    </div>
+  </div>
+</body>
+
+<style>
+  html {
+    display: grid;
+    grid: 1fr 1fr 1fr;
+
+  }
+
+  body {
+  display: grid;
+  grid-column: 2;
+  font-size: 25;
+  place-items: center;
+  } 
+
+  #mainbody {
+    display: grid;
+    /* grid-column: 2; */
+    margin: auto;
+    font-size: 20px;
+  }
+</style>
+
+<script>
+  let average = {
+  JS101: 173,
+  JS120: 105,
+  JS130: 70,
+  JS170: 28,
+  JS175: 55,
+  JS180: 49,
+  JS185: 12,
+  Backend: 492,
+};
+
+let done = 0;
+
+function displayAverage(){
+  let list = document.getElementById("list");
+  for (prop in average) {
+    let li = document.createElement('li');
+    let course = document.createTextNode(`${prop} takes on average ${average[prop]} hours to complete`);
+    li.appendChild(course);
+    document.getElementById('list').appendChild(li);
+  }
+}
+
+displayAverage();
+
+function getHoursPerWeek() {
+  let hours = Number(document.getElementById("hoursperweek").value);
+  getTotalHoursDone();
+  let total = average.Backend - done;
+  console.log(total, done, hours);
+  let estimate = document.createTextNode(`It will take you ${
+    Math.round(total / hours)
+      } weeks to finish the backend part of core based on your current progress.
+      Based on the average it will take you another ${total} hours.`);
+  document.getElementById('body').appendChild(estimate);
+}
+
+
+function getTotalHoursDone() {
+  done = Number(document.getElementById("hoursdone").value);
+}
+
+</script>
+</html>
