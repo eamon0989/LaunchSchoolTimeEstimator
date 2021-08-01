@@ -113,7 +113,7 @@ class UserInput {
   }
 
   addYourMaxEstimateToDOM(maxDate) {
-    let yourMaxText = `Based on the max on record it could take you another ${
+    let yourMaxText = `Based on the maximum time on record it could take you another ${
       this.maxTotal} hours or ${this.maxWeeks} weeks. This means that you would finish on ${maxDate.now}`;
     let yourMaxEle = new ElementMakerHTML('li', yourMaxText,'list');
     yourMaxEle.appendElementToDOM();
