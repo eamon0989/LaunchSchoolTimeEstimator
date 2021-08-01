@@ -51,7 +51,7 @@ h1 {
     display: grid;
     grid-column: 2;
     text-align: center;
-    font-size: 2.5rem;
+    font-size: 2.9rem;
     padding: 1.5rem ;
 }
 
@@ -71,6 +71,10 @@ button {
     cursor: pointer;
     /* width: 15%; */
     padding: 1rem;
+}
+
+button:hover{
+  background-color: #2f94fa9d;
 }
 
 .inputWrapper {
@@ -99,7 +103,7 @@ input:focus{
     background-color: #d1deee;
 }
 
-.liDiv {
+.li {
     display:flex;
     flex-direction:row;
     grid-column: 2;
@@ -123,7 +127,6 @@ li {
   border: solid 1px transparent;
   overflow: hidden;  
   border-radius: 3px;
-  /* width: 100%; */
   flex-grow: 2;
 }
 @media (hover: hover) { 
@@ -185,20 +188,3 @@ li:hover {
         opacity:0;
       }
 }
-
-/* button:hover {
-  cursor: pointer;
-} */
-© 2021 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-Loading complete
