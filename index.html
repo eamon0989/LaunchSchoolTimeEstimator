@@ -8,18 +8,23 @@
   <title>Launch School time estimate</title>
 </head>
 <body id="body">
+  <div id="wrapper">
   <h1>Check how long it will take you to finish core based on the average figures from the forum</h1>
   
   <div id="mainbody">
     <div>
-      <label for="hoursperweek">How many hours do you study per week?:</label>
-      <input type="hoursperweek" id="hoursperweek" name="hoursperweek" required
+      <!-- <label for="hoursperweek">How many hours do you study per week?:</label> -->
+      <form>
+      <input type="hoursperweek" placeholder="How many hours do you study per week?" id="hoursperweek" name="hoursperweek" required
          minlength="1" size="10">
+        </form>
     </div>
     <div>
-      <label for="hoursdone">How many hours have you done already?:</label>
-      <input type="hoursdone" id="hoursdone" name="hoursdone">
-      <button onclick="getUserInput()">Submit</button>
+      <!-- <label for="hoursdone">:</label> -->
+      <form>
+      <input type="hoursdone" placeholder="How many hours have you done already?" id="hoursdone" name="hoursdone">
+      <button type="button" onclick="getUserInput()">Submit</button>
+    </form>
     </div>
     <div>
       <ul id="list">
@@ -30,6 +35,7 @@
   <div id="insertText">
 
   </div>
+</div>
 </body>
 
 <script src="/app.js"></script>

@@ -1,21 +1,198 @@
-html {
-  display: grid;
-  grid-template-columns: 1fr min(80ch, 100%) 1fr;
-  font-size: 20px;
+* {
+    margin: 1px 0px;
+	padding: 0;
+	font: inherit;
+	vertical-align: baseline;
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
 
 }
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;  /* Preferred icon size */
+    display: none;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+  
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+  
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+  
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+  }
 
 body {
-display: grid;
-grid-column: 2;
-place-items: center;
-} 
+  display: grid;
+  grid-template-columns: 1fr min(70ch, calc(100% - 16px)) 1fr;
+}
+
+#wrapper {
+    grid-column: 2;
+  }
 
 h1 {
-  font-size: 30px;
+    display: grid;
+    grid-column: 2;
+    /* text-align: center; */
+    font-size: 2.5rem;
+    padding: 1.5rem ;
 }
 
-#mainbody {
-  display: grid;
-  margin: auto;
+form {
+    display:flex;
+    flex-direction:row;
+    width: 100%;
+    grid-column: 2;
+    margin: 0px;
 }
+
+button {
+    border-radius: 3px;
+    outline: none;
+    border: 1px solid #ccc;
+    background-color: #F6F6F6;
+    cursor: pointer;
+    width: 15%;
+}
+
+.inputWrapper {
+    place-content: center;
+    grid-column: 2;
+    margin: 0.2rem;
+}
+
+input {
+    padding: 1rem 1rem;
+    flex-grow:2;
+    outline: none;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    transition: all 0.3s ease;
+    width: 80%;
+}
+
+input:focus{
+  border-color: #2F95FA;
+}
+
+#addToDo {
+    padding: 0rem 0.9rem;
+    width: 3.5rem;
+    background-color: #d1deee;
+}
+
+.liDiv {
+    display:flex;
+    flex-direction:row;
+    grid-column: 2;
+    margin: 0.2rem;
+}
+
+.liDivAnimation {
+    display:flex;
+    flex-direction:row;
+    grid-column: 2;
+    margin: 0.2rem;
+    animation-duration: 0.5s;
+    animation-name: slideOut;
+}
+
+li {
+  grid-column: 2;
+    list-style-type: none;
+    padding: 1rem;
+    background-color: #F6F6F6;
+    border: solid 1px transparent;
+    overflow: hidden;  
+    border-radius: 3px;
+    /* width: 100%; */
+    flex-grow: 2;
+}
+@media (hover: hover) { 
+    .liDiv:hover > .buttonDiv {
+        display: flex;
+    }
+ }
+
+li:hover {
+    border: 1px solid #333333;
+    overflow: hidden;  
+}
+
+.buttonDiv {
+    grid-column: 2;
+    margin: 0px;
+    justify-content: center;
+    align-items: center;
+    width: 3.5rem;
+    background-color: #ff6b6b;
+    border-radius: 3px;
+    outline: none;
+    border: 1px solid #ccc;
+    display: none;
+    visibility: none;
+    cursor: pointer;
+}
+
+.checked {
+    text-decoration: line-through;
+}
+
+#resetWrapper{
+    place-content: center;
+    display: grid;
+}
+
+#reset {
+    padding: 1rem;
+}
+
+#reset:hover {
+    background-color: #ff6b6b;
+
+}
+
+@keyframes slideOut {
+    from {
+        margin-left: 0%;
+        width: 100%;
+        opacity:1;
+      }
+      90% {
+        opacity: 0;
+      }
+      to {
+        margin-left: 100%;
+        width: 100%;
+        opacity:0;
+      }
+}
+
+/* button:hover {
+  cursor: pointer;
+} */
+© 2021 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+Loading complete

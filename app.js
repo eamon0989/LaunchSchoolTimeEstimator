@@ -82,7 +82,7 @@ let avgText = `The average time to finish the backend course is: ${
 let li = new ElementMakerHTML('li', avgText, 'list');
 li.appendElementToDOM();
 
-let maxText = `The Max time on record to finish the backend course is: ${
+let maxText = `The maximum time on record to finish the backend course is: ${
   launchSchoolHours.BackendMax} hours.`;
 let li2 = new ElementMakerHTML('li', maxText, 'list');
 li2.appendElementToDOM();
@@ -108,14 +108,14 @@ class UserInput {
   addYourAvgToDOM(date) {
     let yourAvgText = `Based on the average it will probably take you another ${
       this.total} hours or ${this.avgWeeks} weeks. This means that you would finish on ${date.now}`;
-    let yourAvgEle = new ElementMakerHTML('div', yourAvgText,'insertText');
+    let yourAvgEle = new ElementMakerHTML('li', yourAvgText,'list');
     yourAvgEle.appendElementToDOM();
   }
 
   addYourMaxEstimateToDOM(maxDate) {
     let yourMaxText = `Based on the max on record it could take you another ${
       this.maxTotal} hours or ${this.maxWeeks} weeks. This means that you would finish on ${maxDate.now}`;
-    let yourMaxEle = new ElementMakerHTML('div', yourMaxText,'insertText');
+    let yourMaxEle = new ElementMakerHTML('li', yourMaxText,'list');
     yourMaxEle.appendElementToDOM();
   }
 }
