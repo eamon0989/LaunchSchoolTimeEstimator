@@ -43,86 +43,80 @@ launchSchoolHours.getMaxOfCourse();
 launchSchoolHours.getBackendAvg();
 launchSchoolHours.getMaxTotal();
 
-// This function creates html list elements and adds them to the html
-// based on the numbers from the launchSchoolHours object.
-function createListOfAverageTimes() {
-  let list = document.getElementById("list");
-
-  for (let prop in launchSchoolHours) {
-    if (launchSchoolHours[prop].average) {
-      let li = document.createElement('li');
-      let course = document.createTextNode(`${prop} takes on average ${
-        launchSchoolHours[prop].average
-      } hours to complete and the max on record is ${
-        launchSchoolHours[prop].max}.`);
-      list.appendChild(li);
-      li.appendChild(course);
-      document.getElementById('list').appendChild(li);
-    }
+class ElementMakerHTML {
+  constructor(elementType, text, parentElement) {
+    this.ele = document.createElement(elementType);
+    this.textNode = document.createTextNode(text);
+    this.ele.appendChild(this.textNode);
+    this.parentElement = document.getElementById(parentElement);
   }
 
-  createAvgTotalElement();
-  createAvgMaxElement();
+  appendElementToDOM() {
+    this.parentElement.appendChild(this.ele);
+  }
 }
 
-function createAvgTotalElement() {
-  let li = document.createElement('li');
-  let courseAvg = launchSchoolHours.BackendAverage;
-  let courseAvgNode = document
-    .createTextNode(`The average time to finish the backend course is: ${
-      courseAvg}.`);
-  li.appendChild(courseAvgNode);
-  document.getElementById('list').appendChild(li);
+class DateMaker {
+  constructor(days) {
+    this.now = new Date();
+    this.now.setDate(this.now.getDate() + days);
+    this.now = this.now.toDateString();
+  }
 }
 
-function createAvgMaxElement() {
-  let li2 = document.createElement('li');
-  let courseMax = launchSchoolHours.BackendMax;
-  let courseMaxNode = document
-    .createTextNode(`The Max time on record to finish the backend course is: ${
-      courseMax}.`);
-  li2.appendChild(courseMaxNode);
-  document.getElementById('list').appendChild(li2);
+// This function adds a new list element to the DOM for each 'course'
+function createListOfAverageTimes() {
+  for (let prop in launchSchoolHours) {
+    if (launchSchoolHours[prop].average) {
+      let text = `${prop} takes on average ${launchSchoolHours[prop].average
+      } hours to complete and the max on record is ${launchSchoolHours[prop].max}.`;
+
+      let li = new ElementMakerHTML('li', text, 'list');
+      li.appendElementToDOM();
+    }
+  }
 }
 
-function getHoursPerWeek() {
-  let hours = Number(document.getElementById("hoursperweek").value);
+// gets user input
+function getUserInput() {
+  let hours = getHoursPerWeek();
   let done = getTotalHoursDone();
   let total = launchSchoolHours.BackendAverage - done;
   let maxTotal = launchSchoolHours.BackendMax - done;
+  let days = (total / hours) * 7;
+  let maxDays = (maxTotal / hours) * 7;
 
-  createYourAvgHoursElement(total, hours);
-  createYourMaxHoursElement(maxTotal, hours);
-}
+  let date = new DateMaker(days);
+  let yourAvgText = `Based on the average it will probably take you another ${
+    total} hours or ${Math.round(total / hours)
+  } weeks. This means that you would finish on ${date.now}`;
+  let yourAvgEle = new ElementMakerHTML('div', yourAvgText,'insertText');
+  yourAvgEle.appendElementToDOM();
 
-function createYourAvgHoursElement(total, hours) {
-  let now = new Date();
-  now.setDate(now.getDate() + ((total / hours) * 7));
-  let date = now.toDateString();
-  let div2 = document.createElement('div');
-  document.getElementById('insertText').appendChild(div2);
-  let left = document
-    .createTextNode(`Based on the average it will probably take you another ${
-      total} hours or ${Math.round(total / hours)
-    } weeks. This means that you would finish on ${date}`);
-  div2.appendChild(left);
-}
-
-function createYourMaxHoursElement(maxTotal, hours) {
-  let now = new Date();
-  now.setDate(now.getDate() + ((maxTotal / hours) * 7));
-  let date = now.toDateString();
-  let maxDiv = document.createElement('div');
-  document.getElementById('insertText').appendChild(maxDiv);
-  let maxLeft = document
-    .createTextNode(`Based on the max on record it could take you another ${
-      maxTotal} hours or ${Math.round(maxTotal / hours)
-    } weeks. This means you would finish on ${date}`);
-  maxDiv.appendChild(maxLeft);
+  let maxDate = new DateMaker(maxDays);
+  let yourMaxText = `Based on the max on record it could take you another ${
+    maxTotal} hours or ${Math.round(maxTotal / hours)
+  } weeks. This means that you would finish on ${maxDate.now}`;
+  let yourMaxEle = new ElementMakerHTML('div', yourMaxText,'insertText');
+  yourMaxEle.appendElementToDOM();
 }
 
 function getTotalHoursDone() {
   return Number(document.getElementById("hoursdone").value);
 }
 
+function getHoursPerWeek() {
+  return Number(document.getElementById("hoursperweek").value);
+}
+
 createListOfAverageTimes();
+
+let avgText = `The average time to finish the backend course is: ${
+  launchSchoolHours.BackendAverage} hours.`;
+let li = new ElementMakerHTML('li', avgText, 'list');
+li.appendElementToDOM();
+
+let maxText = `The Max time on record to finish the backend course is: ${
+  launchSchoolHours.BackendMax} hours.`;
+let li2 = new ElementMakerHTML('li', maxText, 'list');
+li2.appendElementToDOM();
