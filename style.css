@@ -1,0 +1,26 @@
+html {
+  display: grid;
+  grid-template-columns: 1fr min(80ch, 100%) 1fr;
+  font-size: 20px;
+
+}
+
+body {
+display: grid;
+grid-column: 2;
+place-items: center;
+} 
+
+h1 {
+  font-size: 30px;
+}
+
+#mainbody {
+  display: grid;
+  margin: auto;
+}
+
+#moreAccurate {
+  padding-top: 25px;
+  display: none;
+}
