@@ -57,7 +57,7 @@
 </style>
 
 <script>
-  let launchSchoolHourse = {
+  let launchSchoolHours = {
   JS101: { hours: [190,	149,	307,	113,	102,	165,	78]},
   JS120: { hours: [115, 175,	85,	131,	63,	87,	95,	90]},
   JS130: { hours: [55, 80,	155,	69,	60,	36,	50,	58]},
@@ -70,8 +70,8 @@
 
 
 function getMaxOfCourse() {
-  for (let prop in launchSchoolHourse) {
-    launchSchoolHourse[prop].max = Math.max(...launchSchoolHourse[prop].hours);
+  for (let prop in launchSchoolHours) {
+    launchSchoolHours[prop].max = Math.max(...launchSchoolHours[prop].hours);
   }
 }
 
@@ -79,26 +79,26 @@ function getMaxOfCourse() {
 
 function getMaxTotal() {
   let max = 0;
-  for (let prop in launchSchoolHourse) {
-    if (launchSchoolHourse[prop].max)
-    max += launchSchoolHourse[prop].max;
+  for (let prop in launchSchoolHours) {
+    if (launchSchoolHours[prop].max)
+    max += launchSchoolHours[prop].max;
   }
   
-  launchSchoolHourse.BackendMax = max;
+  launchSchoolHours.BackendMax = max;
 }
 
 
 
 function getBackendAvg() {
   let courseAvg = 0;
-  for (let prop in launchSchoolHourse) {
-    console.log(launchSchoolHourse[prop].hours, launchSchoolHourse[prop].hours.length);
-    launchSchoolHourse[prop].launchSchoolHourse = Math.round(launchSchoolHourse[prop].hours.reduce((acc, num) => acc + num) / launchSchoolHourse[prop].hours.length)
-    courseAvg += launchSchoolHourse[prop].launchSchoolHourse;
+  for (let prop in launchSchoolHours) {
+    console.log(launchSchoolHours[prop].hours, launchSchoolHours[prop].hours.length);
+    launchSchoolHours[prop].launchSchoolHours = Math.round(launchSchoolHours[prop].hours.reduce((acc, num) => acc + num) / launchSchoolHours[prop].hours.length)
+    courseAvg += launchSchoolHours[prop].launchSchoolHours;
   }
 
-  launchSchoolHourse.BackendAverage = courseAvg;
-  console.log(launchSchoolHourse);
+  launchSchoolHours.BackendAverage = courseAvg;
+  console.log(launchSchoolHours);
 }
 
 getMaxOfCourse();
@@ -108,11 +108,11 @@ let done = 0;
 
 function displayAverage(){
   let list = document.getElementById("list");
-  for (prop in launchSchoolHourse) {
-    if (launchSchoolHourse[prop].launchSchoolHourse) {
+  for (prop in launchSchoolHours) {
+    if (launchSchoolHours[prop].launchSchoolHours) {
       let li = document.createElement('li');
-      let course = document.createTextNode(`${prop} takes on average ${launchSchoolHourse[prop]. launchSchoolHourse} hours to complete`);
-      let max = document.createTextNode(`The max time on record for ${prop} is: ${launchSchoolHourse [prop].max} hours.`)
+      let course = document.createTextNode(`${prop} takes on average ${launchSchoolHours[prop]. launchSchoolHours} hours to complete`);
+      let max = document.createTextNode(`The max time on record for ${prop} is: ${launchSchoolHours [prop].max} hours.`)
       li.appendChild(course);
       document.getElementById('list').appendChild(li);
 
@@ -123,13 +123,13 @@ function displayAverage(){
   }
 
   let li = document.createElement('li');
-  let courseAvg = launchSchoolHourse.BackendAverage;
+  let courseAvg = launchSchoolHours.BackendAverage;
   let courseAvgNode = document.createTextNode(`The average time to finish the backend course is: ${courseAvg}.`)
   li.appendChild(courseAvgNode);
   document.getElementById('list').appendChild(li);
 
   let li2 = document.createElement('li');
-  let courseMax = launchSchoolHourse.BackendMax;
+  let courseMax = launchSchoolHours.BackendMax;
   let courseMaxNode = document.createTextNode(`The Max time on record to finish the backend course is: ${courseMax}.`);
   li2.appendChild(courseMaxNode);
   document.getElementById('list').appendChild(li2);
@@ -139,8 +139,8 @@ function displayAverage(){
 function getHoursPerWeek() {
   let hours = Number(document.getElementById("hoursperweek").value);
   getTotalHoursDone();
-  let total = launchSchoolHourse.BackendAverage - done;
-  let maxTotal = launchSchoolHourse.BackendMax - done;
+  let total = launchSchoolHours.BackendAverage - done;
+  let maxTotal = launchSchoolHours.BackendMax - done;
   let now = new Date();
   now.setDate(now.getDate() + ((maxTotal / hours) * 7));
   let then = new Date();
