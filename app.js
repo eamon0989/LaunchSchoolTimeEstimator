@@ -29,14 +29,12 @@ class hours {
   getBackendAvg() {
     let courseAvg = 0;
     for (let prop in this) {
-      console.log(this[prop].hours, this[prop].hours.length);
       this[prop].average = Math.round(this[prop].hours
         .reduce((acc, num) => acc + num) / this[prop].hours.length);
       courseAvg += this[prop].average;
     }
 
     this.BackendAverage = courseAvg;
-    console.log(this);
   }
 }
 
@@ -45,12 +43,12 @@ launchSchoolHours.getMaxOfCourse();
 launchSchoolHours.getBackendAvg();
 launchSchoolHours.getMaxTotal();
 
-let done = 0;
-
-function displayAverage() {
+// This function creates html list elements and adds them to the html
+// based on the numbers from the launchSchoolHours object.
+function createListOfAverageTimes() {
   let list = document.getElementById("list");
 
-  for (prop in launchSchoolHours) {
+  for (let prop in launchSchoolHours) {
     if (launchSchoolHours[prop].average) {
       let li = document.createElement('li');
       let course = document.createTextNode(`${prop} takes on average ${
@@ -63,6 +61,11 @@ function displayAverage() {
     }
   }
 
+  createAvgTotalElement();
+  createAvgMaxElement();
+}
+
+function createAvgTotalElement() {
   let li = document.createElement('li');
   let courseAvg = launchSchoolHours.BackendAverage;
   let courseAvgNode = document
@@ -70,7 +73,9 @@ function displayAverage() {
       courseAvg}.`);
   li.appendChild(courseAvgNode);
   document.getElementById('list').appendChild(li);
+}
 
+function createAvgMaxElement() {
   let li2 = document.createElement('li');
   let courseMax = launchSchoolHours.BackendMax;
   let courseMaxNode = document
@@ -80,41 +85,44 @@ function displayAverage() {
   document.getElementById('list').appendChild(li2);
 }
 
-
 function getHoursPerWeek() {
   let hours = Number(document.getElementById("hoursperweek").value);
-  getTotalHoursDone();
+  let done = getTotalHoursDone();
   let total = launchSchoolHours.BackendAverage - done;
   let maxTotal = launchSchoolHours.BackendMax - done;
-  let now = new Date();
-  now.setDate(now.getDate() + ((maxTotal / hours) * 7));
-  let then = new Date();
-  console.log(((maxTotal / hours) * 7));
-  then.setDate(then.getDate() + ((total / hours) * 7));
-  console.log(((total / hours) * 7));
 
+  createYourAvgHoursElement(total, hours);
+  createYourMaxHoursElement(maxTotal, hours);
+}
+
+function createYourAvgHoursElement(total, hours) {
+  let now = new Date();
+  now.setDate(now.getDate() + ((total / hours) * 7));
+  let date = now.toDateString();
   let div2 = document.createElement('div');
   document.getElementById('insertText').appendChild(div2);
   let left = document
     .createTextNode(`Based on the average it will probably take you another ${
       total} hours or ${Math.round(total / hours)
-      } weeks. This means that you would finish on ${then.toDateString()}`);
+    } weeks. This means that you would finish on ${date}`);
   div2.appendChild(left);
+}
 
+function createYourMaxHoursElement(maxTotal, hours) {
+  let now = new Date();
+  now.setDate(now.getDate() + ((maxTotal / hours) * 7));
+  let date = now.toDateString();
   let maxDiv = document.createElement('div');
   document.getElementById('insertText').appendChild(maxDiv);
   let maxLeft = document
     .createTextNode(`Based on the max on record it could take you another ${
       maxTotal} hours or ${Math.round(maxTotal / hours)
-      } weeks. This means you would finish on ${now.toDateString()}`);
+    } weeks. This means you would finish on ${date}`);
   maxDiv.appendChild(maxLeft);
-  // let moreAccurateDiv = document.getElementById('moreAccurate')
-  // moreAccurateDiv.style.display = 'block';
 }
-
 
 function getTotalHoursDone() {
-  done = Number(document.getElementById("hoursdone").value);
+  return Number(document.getElementById("hoursdone").value);
 }
 
-displayAverage();
+createListOfAverageTimes();
