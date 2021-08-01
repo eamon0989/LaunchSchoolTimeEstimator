@@ -130,3 +130,4 @@ function getUserInput() {
   let maxDate = new DateMaker(user.maxWeeks * 7);
   user.addYourMaxEstimateToDOM(maxDate);
 }
+
