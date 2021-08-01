@@ -93,8 +93,8 @@ function getBackendAvg() {
   let courseAvg = 0;
   for (let prop in launchSchoolHours) {
     console.log(launchSchoolHours[prop].hours, launchSchoolHours[prop].hours.length);
-    launchSchoolHours[prop].launchSchoolHours = Math.round(launchSchoolHours[prop].hours.reduce((acc, num) => acc + num) / launchSchoolHours[prop].hours.length)
-    courseAvg += launchSchoolHours[prop].launchSchoolHours;
+    launchSchoolHours[prop].average = Math.round(launchSchoolHours[prop].hours.reduce((acc, num) => acc + num) / launchSchoolHours[prop].hours.length)
+    courseAvg += launchSchoolHours[prop].average;
   }
 
   launchSchoolHours.BackendAverage = courseAvg;
@@ -106,19 +106,19 @@ getBackendAvg()
 getMaxTotal();
 let done = 0;
 
-function displayAverage(){
+function displayAverage() {
   let list = document.getElementById("list");
   for (prop in launchSchoolHours) {
-    if (launchSchoolHours[prop].launchSchoolHours) {
+    if (launchSchoolHours[prop].average) {
       let li = document.createElement('li');
-      let course = document.createTextNode(`${prop} takes on average ${launchSchoolHours[prop]. launchSchoolHours} hours to complete`);
-      let max = document.createTextNode(`The max time on record for ${prop} is: ${launchSchoolHours [prop].max} hours.`)
+      let course = document.createTextNode(`${prop} takes on average ${launchSchoolHours[prop].average} hours to complete and the max on record is ${launchSchoolHours[prop].max}.`);
+      // let max = document.createTextNode(`The max time on record for ${prop} is: ${launchSchoolHours [prop].max} hours.`)
       li.appendChild(course);
       document.getElementById('list').appendChild(li);
 
-      let li2 = document.createElement('li');
-      li2.appendChild(max);
-      document.getElementById('list').appendChild(li2);
+      // let li2 = document.createElement('li');
+      // li2.appendChild(max);
+      // document.getElementById('list').appendChild(li2);
     }
   }
 
