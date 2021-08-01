@@ -51,7 +51,6 @@
 
   #mainbody {
     display: grid;
-    /* grid-column: 2; */
     margin: auto;
   }
 </style>
@@ -67,15 +66,11 @@
   JS185: { hours: [8,	10,	15,	15,	7,	12,	10,	16]},
 };
 
-
-
 function getMaxOfCourse() {
   for (let prop in launchSchoolHours) {
     launchSchoolHours[prop].max = Math.max(...launchSchoolHours[prop].hours);
   }
 }
-
-
 
 function getMaxTotal() {
   let max = 0;
@@ -86,8 +81,6 @@ function getMaxTotal() {
   
   launchSchoolHours.BackendMax = max;
 }
-
-
 
 function getBackendAvg() {
   let courseAvg = 0;
@@ -112,13 +105,8 @@ function displayAverage() {
     if (launchSchoolHours[prop].average) {
       let li = document.createElement('li');
       let course = document.createTextNode(`${prop} takes on average ${launchSchoolHours[prop].average} hours to complete and the max on record is ${launchSchoolHours[prop].max}.`);
-      // let max = document.createTextNode(`The max time on record for ${prop} is: ${launchSchoolHours [prop].max} hours.`)
       li.appendChild(course);
       document.getElementById('list').appendChild(li);
-
-      // let li2 = document.createElement('li');
-      // li2.appendChild(max);
-      // document.getElementById('list').appendChild(li2);
     }
   }
 
