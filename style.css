@@ -19,8 +19,3 @@ h1 {
   display: grid;
   margin: auto;
 }
-
-#moreAccurate {
-  padding-top: 25px;
-  display: none;
-}
