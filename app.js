@@ -124,7 +124,7 @@ class UserInput {
 function getUserInput() {
   if (!validateHoursPerWeekInput()) return false;
   let user = new UserInput();
-  console.log(user.done);
+
   let date = new DateMaker(user.avgWeeks * 7);
   user.addYourAvgToDOM(date);
 
