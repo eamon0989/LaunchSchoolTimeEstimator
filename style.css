@@ -63,7 +63,7 @@ form {
     margin: 0px;
 }
 
-button {
+button, #submitbutton {
     border-radius: 3px;
     outline: none;
     border: 1px solid #ccc;
@@ -73,7 +73,7 @@ button {
     padding: 1rem;
 }
 
-button:hover{
+button:hover, #submitbutton:hover {
   background-color: #2f94fa9d;
 }
 
