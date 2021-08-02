@@ -11,7 +11,7 @@ class ElementMakerHTML {
   }
 }
 
-class hours {
+class Hours {
   constructor() {
     this.JS101 = { hours: [190, 149, 307, 113, 102, 165, 78]};
     this.JS120 = { hours: [115, 175, 85, 131, 63, 87, 95, 90]};
@@ -71,7 +71,7 @@ class DateMaker {
   }
 }
 
-let launchSchoolHours = new hours();
+let launchSchoolHours = new Hours();
 launchSchoolHours.getMaxOfCourse();
 launchSchoolHours.getBackendAvg();
 launchSchoolHours.getMaxTotal();
@@ -122,8 +122,9 @@ class UserInput {
 
 // gets user input
 function getUserInput() {
+  if (!validateHoursPerWeekInput()) return false;
   let user = new UserInput();
-
+  console.log(user.done);
   let date = new DateMaker(user.avgWeeks * 7);
   user.addYourAvgToDOM(date);
 
@@ -131,3 +132,15 @@ function getUserInput() {
   user.addYourMaxEstimateToDOM(maxDate);
 }
 
+function validateHoursPerWeekInput() {
+  let input = Number(document.getElementById("hoursperweek").value);
+
+  if (Number.isNaN(input) || input <= 0) {
+    alert("Please input how many hours you study per week.");
+    return false;
+  }
+
+  return true;
+}
+
+document.getElementById("submitbutton").addEventListener("click", getUserInput);

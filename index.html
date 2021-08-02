@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="/style.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
   <title>Launch School time estimate</title>
 </head>
 <body id="body">
@@ -14,17 +14,17 @@
   <div id="mainbody">
     <div>
       <form>
-      <input type="hoursperweek" placeholder="How many hours do you study per week?"
-        id="hoursperweek" name="hoursperweek" required
-         minlength="1" size="10">
-        </form>
+        <input type="hoursperweek" placeholder="How many hours do you study per week?"
+          id="hoursperweek" name="hoursperweek" minlength="1" size="10">
+        <input type="hoursdone" placeholder="How many hours have you done?"
+          id="hoursdone" name="hoursdone">
+        <div role="button" id="submitbutton">Submit</div>
+      </form>
     </div>
 
     <div>
       <form>
-        <input type="hoursdone" placeholder="How many hours have you done?"
-          id="hoursdone" name="hoursdone">
-        <button type="button" onclick="getUserInput()">Submit</button>
+
       </form>
     </div>
 
@@ -39,5 +39,5 @@
 </div>
 </body>
 
-<script src="/app.js"></script>
+<script src="app.js"></script>
 </html>
