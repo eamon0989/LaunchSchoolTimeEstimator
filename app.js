@@ -13,13 +13,17 @@ class ElementMakerHTML {
 
 class Hours {
   constructor() {
-    this.JS101 = { hours: [190, 149, 307, 113, 102, 165, 78]};
-    this.JS120 = { hours: [115, 175, 85, 131, 63, 87, 95, 90]};
-    this.JS130 = { hours: [55, 80, 155, 69, 60, 36, 50, 58]};
-    this.JS170 = { hours: [30, 26, 30, 38, 17, 35, 37, 9]};
-    this.JS175 = { hours: [30, 73, 90, 58, 24, 76, 35, 52]};
-    this.JS180 = { hours: [83, 49, 48, 58, 25, 27, 51, 51]};
-    this.JS185 = { hours: [8, 10, 15, 15, 7, 12, 10, 16]};
+    this.JS101 = { hours: [190, 149, 307, 113, 102, 165, 78] };
+    this.JS120 = { hours: [115, 175, 85, 131, 63, 87, 95, 90] };
+    this.JS130 = { hours: [55, 80, 155, 69, 60, 36, 50, 58] };
+    this.JS170 = { hours: [30, 26, 30, 38, 17, 35, 37, 9] };
+    this.JS175 = { hours: [30, 73, 90, 58, 24, 76, 35, 52] };
+    this.JS180 = { hours: [83, 49, 48, 58, 25, 27, 51, 51] };
+    this.JS185 = { hours: [8, 10, 15, 15, 7, 12, 10, 16] };
+    this.getMaxOfCourse();
+    this.getBackendAvg();
+    this.getMaxTotal();
+    this.addCourseListToDOM();
   }
 
   getMaxOfCourse() {
@@ -72,10 +76,6 @@ class DateMaker {
 }
 
 let launchSchoolHours = new Hours();
-launchSchoolHours.getMaxOfCourse();
-launchSchoolHours.getBackendAvg();
-launchSchoolHours.getMaxTotal();
-launchSchoolHours.addCourseListToDOM();
 
 let avgText = `The average time to finish the backend course is: ${
   launchSchoolHours.BackendAverage} hours.`;
