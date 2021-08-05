@@ -24,6 +24,8 @@ class Hours {
     this.getBackendAvg();
     this.getMaxTotal();
     this.addCourseListToDOM();
+    this.addAvgToDom();
+    this.addMaxToDom();
   }
 
   getMaxOfCourse() {
@@ -65,6 +67,20 @@ class Hours {
       }
     }
   }
+
+  addAvgToDom() {
+    let avgText = `The average time to finish the backend course is: ${
+      this.BackendAverage} hours.`;
+    let li = new ElementMakerHTML('li', avgText, 'list');
+    li.appendElementToDOM();
+  }
+
+  addMaxToDom() {
+    let maxText = `The maximum time on record to finish the backend course is: ${
+      this.BackendMax} hours.`;
+    let li2 = new ElementMakerHTML('li', maxText, 'list');
+    li2.appendElementToDOM();
+  }
 }
 
 class DateMaker {
@@ -76,16 +92,6 @@ class DateMaker {
 }
 
 let launchSchoolHours = new Hours();
-
-let avgText = `The average time to finish the backend course is: ${
-  launchSchoolHours.BackendAverage} hours.`;
-let li = new ElementMakerHTML('li', avgText, 'list');
-li.appendElementToDOM();
-
-let maxText = `The maximum time on record to finish the backend course is: ${
-  launchSchoolHours.BackendMax} hours.`;
-let li2 = new ElementMakerHTML('li', maxText, 'list');
-li2.appendElementToDOM();
 
 class UserInput {
   constructor() {
