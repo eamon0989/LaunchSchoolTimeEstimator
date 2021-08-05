@@ -98,11 +98,11 @@ class UserInput {
   }
 
   getHoursPerWeek() {
-    return Number(document.getElementById("hoursperweek").value);
+    return Number(document.getElementById('hoursperweek').value);
   }
 
   getTotalHoursDone() {
-    return Number(document.getElementById("hoursdone").value);
+    return Number(document.getElementById('hoursdone').value);
   }
 
   addYourAvgToDOM(date) {
@@ -134,14 +134,19 @@ function getUserInput() {
 }
 
 function validateHoursPerWeekInput() {
-  let input = Number(document.getElementById("hoursperweek").value);
+  let input = Number(document.getElementById('hoursperweek').value);
 
   if (Number.isNaN(input) || input <= 0) {
-    alert("Please input how many hours you study per week.");
+    alert('Please input how many hours you study per week.');
     return false;
   }
 
   return true;
 }
 
-document.getElementById("submitbutton").addEventListener("click", getUserInput);
+function scrollToBottom() {
+  window.scrollTo(0, document.body.scrollHeight);
+}
+
+document.getElementById('submitbutton').addEventListener('click', getUserInput);
+document.getElementById('submitbutton').addEventListener('click', scrollToBottom);
