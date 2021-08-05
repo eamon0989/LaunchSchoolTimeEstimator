@@ -13,13 +13,19 @@ class ElementMakerHTML {
 
 class Hours {
   constructor() {
-    this.JS101 = { hours: [190, 149, 307, 113, 102, 165, 78]};
-    this.JS120 = { hours: [115, 175, 85, 131, 63, 87, 95, 90]};
-    this.JS130 = { hours: [55, 80, 155, 69, 60, 36, 50, 58]};
-    this.JS170 = { hours: [30, 26, 30, 38, 17, 35, 37, 9]};
-    this.JS175 = { hours: [30, 73, 90, 58, 24, 76, 35, 52]};
-    this.JS180 = { hours: [83, 49, 48, 58, 25, 27, 51, 51]};
-    this.JS185 = { hours: [8, 10, 15, 15, 7, 12, 10, 16]};
+    this.JS101 = { hours: [190, 149, 307, 113, 102, 165, 78] };
+    this.JS120 = { hours: [115, 175, 85, 131, 63, 87, 95, 90] };
+    this.JS130 = { hours: [55, 80, 155, 69, 60, 36, 50, 58] };
+    this.JS170 = { hours: [30, 26, 30, 38, 17, 35, 37, 9] };
+    this.JS175 = { hours: [30, 73, 90, 58, 24, 76, 35, 52] };
+    this.JS180 = { hours: [83, 49, 48, 58, 25, 27, 51, 51] };
+    this.JS185 = { hours: [8, 10, 15, 15, 7, 12, 10, 16] };
+    this.getMaxOfCourse();
+    this.getBackendAvg();
+    this.getMaxTotal();
+    this.addCourseListToDOM();
+    this.addAvgToDom();
+    this.addMaxToDom();
   }
 
   getMaxOfCourse() {
@@ -61,6 +67,20 @@ class Hours {
       }
     }
   }
+
+  addAvgToDom() {
+    let avgText = `The average time to finish the backend course is: ${
+      this.BackendAverage} hours.`;
+    let li = new ElementMakerHTML('li', avgText, 'list');
+    li.appendElementToDOM();
+  }
+
+  addMaxToDom() {
+    let maxText = `The maximum time on record to finish the backend course is: ${
+      this.BackendMax} hours.`;
+    let li2 = new ElementMakerHTML('li', maxText, 'list');
+    li2.appendElementToDOM();
+  }
 }
 
 class DateMaker {
@@ -72,20 +92,6 @@ class DateMaker {
 }
 
 let launchSchoolHours = new Hours();
-launchSchoolHours.getMaxOfCourse();
-launchSchoolHours.getBackendAvg();
-launchSchoolHours.getMaxTotal();
-launchSchoolHours.addCourseListToDOM();
-
-let avgText = `The average time to finish the backend course is: ${
-  launchSchoolHours.BackendAverage} hours.`;
-let li = new ElementMakerHTML('li', avgText, 'list');
-li.appendElementToDOM();
-
-let maxText = `The maximum time on record to finish the backend course is: ${
-  launchSchoolHours.BackendMax} hours.`;
-let li2 = new ElementMakerHTML('li', maxText, 'list');
-li2.appendElementToDOM();
 
 class UserInput {
   constructor() {
@@ -98,11 +104,11 @@ class UserInput {
   }
 
   getHoursPerWeek() {
-    return Number(document.getElementById("hoursperweek").value);
+    return Number(document.getElementById('hoursperweek').value);
   }
 
   getTotalHoursDone() {
-    return Number(document.getElementById("hoursdone").value);
+    return Number(document.getElementById('hoursdone').value);
   }
 
   addYourAvgToDOM(date) {
@@ -134,14 +140,19 @@ function getUserInput() {
 }
 
 function validateHoursPerWeekInput() {
-  let input = Number(document.getElementById("hoursperweek").value);
+  let input = Number(document.getElementById('hoursperweek').value);
 
   if (Number.isNaN(input) || input <= 0) {
-    alert("Please input how many hours you study per week.");
+    alert('Please input how many hours you study per week.');
     return false;
   }
 
   return true;
 }
 
-document.getElementById("submitbutton").addEventListener("click", getUserInput);
+function scrollToBottom() {
+  window.scrollTo(0, document.body.scrollHeight);
+}
+
+document.getElementById('submitbutton').addEventListener('click', getUserInput);
+document.getElementById('submitbutton').addEventListener('click', scrollToBottom);
