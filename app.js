@@ -127,11 +127,29 @@ class UserInput {
     let yourMaxEle = new ElementMakerHTML('li', yourMaxText,'list');
     yourMaxEle.appendElementToDOM();
   }
+
+  addMoreAccurateToDom() {
+    let moreAccurateText = `If you want a more accurate estimate and have finished JS109, write how many hours it took you here:`;
+    let li2 = new ElementMakerHTML('li', moreAccurateText, 'list');
+    li2.ele.id = 'js120hours';
+    li2.appendElementToDOM();
+    let inputDiv = new ElementMakerHTML('div', '', 'list');
+    inputDiv.ele.id = 'inputDiv';
+    inputDiv.appendElementToDOM();
+    let input = new ElementMakerHTML('input', '', 'inputDiv');
+    input.ele.id = "numberInput";
+    input.ele.placeholder = "How many hours did JS109 take you?";
+    input.appendElementToDOM();
+    let submitButton = new ElementMakerHTML('div', 'Submit', 'inputDiv');
+    submitButton.ele.className = 'submitbutton';
+    submitButton.ele.id = 'js120submitbutton';
+    submitButton.appendElementToDOM();
+  }
 }
 
 // gets user input
 function getUserInput() {
-  if (!validateHoursPerWeekInput()) return false;
+  if (!validateHoursPerWeekInput('hoursperweek')) return false;
   let user = new UserInput();
 
   let date = new DateMaker(user.avgWeeks * 7);
@@ -140,10 +158,19 @@ function getUserInput() {
   let maxDate = new DateMaker(user.maxWeeks * 7);
   user.addYourMaxEstimateToDOM(maxDate);
   document.getElementById('submitbutton').style.display = 'none';
+
+  user.addMoreAccurateToDom();
+  document.getElementById('js120submitbutton').addEventListener('click', getJS120Input);
 }
 
-function validateHoursPerWeekInput() {
-  let input = Number(document.getElementById('hoursperweek').value);
+function getJS120Input() {
+  if (!validateHoursPerWeekInput('numberInput')) return false;
+  let js120hours = Number(document.getElementById('numberInput').value);
+  console.log(js120hours);
+}
+
+function validateHoursPerWeekInput(element) {
+  let input = Number(document.getElementById(element).value);
 
   if (Number.isNaN(input) || input <= 0) {
     alert('Please input how many hours you study per week.');
