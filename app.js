@@ -20,6 +20,9 @@ class Hours {
     this.JS175 = { hours: [30, 73, 90, 58, 24, 76, 35, 52] };
     this.JS180 = { hours: [83, 49, 48, 58, 25, 27, 51, 51] };
     this.JS185 = { hours: [8, 10, 15, 15, 7, 12, 10, 16] };
+    this.LS202 = { hours: [78, 55, 160, 46, 92, 38] };
+    this.LS215 = { hours: [75, 66, 60, 105, 52, 89, 77, 73] };
+    this.LS230 = { hours: [212, 245, 91, 187, 187, 192, 172, 136] };
     this.getMaxOfCourse();
     this.getBackendAvg();
     this.getMaxTotal();
@@ -69,14 +72,14 @@ class Hours {
   }
 
   addAvgToDom() {
-    let avgText = `The average time to finish the backend course is: ${
+    let avgText = `The average time to finish the JavaScript track is: ${
       this.BackendAverage} hours.`;
     let li = new ElementMakerHTML('li', avgText, 'list');
     li.appendElementToDOM();
   }
 
   addMaxToDom() {
-    let maxText = `The maximum time on record to finish the backend course is: ${
+    let maxText = `The maximum time on record to finish the JavaScript track is: ${
       this.BackendMax} hours.`;
     let li2 = new ElementMakerHTML('li', maxText, 'list');
     li2.appendElementToDOM();
