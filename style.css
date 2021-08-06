@@ -45,7 +45,21 @@ body {
 
 #wrapper {
     grid-column: 2;
-  }
+}
+
+#inputDiv {
+  /* display: flex; */
+  display: none;
+}
+
+#numberInput {
+  padding: 1rem 1rem;
+  box-sizing:border-box;
+}
+
+#js120hours {
+  display: none;
+}
 
 h1 {
     display: grid;
@@ -63,7 +77,7 @@ form {
     margin: 0px;
 }
 
-button, #submitbutton {
+button, .submitbutton {
     border-radius: 3px;
     outline: none;
     border: 1px solid #ccc;
@@ -73,8 +87,13 @@ button, #submitbutton {
     padding: 1rem;
 }
 
-button:hover, #submitbutton:hover {
+button:hover, .submitbutton:hover {
   background-color: #2f94fa9d;
+}
+
+#listdiv {
+  grid-column: 2;
+  display: grid;
 }
 
 .inputWrapper {
