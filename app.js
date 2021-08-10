@@ -4,7 +4,7 @@ class ElementMakerHTML {
     this.textNode = document.createTextNode(text);
     this.ele.appendChild(this.textNode);
     this.parentElement = document.getElementById(parentElement);
-    this.ele.id = id;
+    if (id) this.ele.id = id;
     this.ele.className = className;
     this.ele.placeholder = placeholder;
   }
@@ -83,7 +83,7 @@ class Hours {
           let text = `${prop} takes on average ${this[prop].average
           } hours to complete and the max on record is ${this[prop].max}.`;
 
-          let li = new ElementMakerHTML('li', text, 'list');
+          let li = new ElementMakerHTML('li', text, 'courseList');
           li.appendElementToDOM();
         }
       }
@@ -110,11 +110,13 @@ class Hours {
   }
 
   addYourComputedAvgEstimateToDOM(comparedToAvgJS109) {
-    let hoursLeft = Math.round(this.BackendAverage * comparedToAvgJS109) - user.done;
+    let hoursLeft = Math.round(this.BackendAverage * comparedToAvgJS109)
+    - user.done;
     let weeksLeft = Math.ceil(hoursLeft / user.hours);
     let date = new DateMaker(weeksLeft * 7);
+
     let yourAvgText = `Based on your input it will probably take you another ${hoursLeft
-      } hours or ${weeksLeft} weeks. This means that you would finish on ${date.now}.`;
+    } hours or ${weeksLeft} weeks. This means that you would finish on ${date.now}.`;
     let yourAvgEle = new ElementMakerHTML('li', yourAvgText,'list');
     yourAvgEle.appendElementToDOM();
   }
@@ -205,5 +207,14 @@ function scrollToBottom() {
   window.scrollTo(0, document.body.scrollHeight);
 }
 
+function hideList() {
+  if (document.getElementById('hoursperweek').value) {
+    let list = document.getElementById('courseList');
+    list.style.display = 'none';
+  }
+}
+
 document.getElementById('submitbutton').addEventListener('click', getUserInput);
 document.getElementById('submitbutton').addEventListener('click', scrollToBottom);
+document.getElementById('submitbutton').addEventListener('click', hideList);
+// document.getElementById('js120submitbutton').addEventListener('click', scrollToBottom);
