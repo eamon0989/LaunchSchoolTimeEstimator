@@ -1,9 +1,12 @@
 class ElementMakerHTML {
-  constructor(elementType, text, parentElement) {
+  constructor(elementType, text, parentElement, id, className, placeholder) {
     this.ele = document.createElement(elementType);
     this.textNode = document.createTextNode(text);
     this.ele.appendChild(this.textNode);
     this.parentElement = document.getElementById(parentElement);
+    this.ele.id = id;
+    this.ele.className = className;
+    this.ele.placeholder = placeholder;
   }
 
   appendElementToDOM() {
@@ -33,7 +36,6 @@ class Hours {
     this.LS202 = { hours: [78, 55, 160, 46, 92, 38] };
     this.LS215 = { hours: [75, 66, 60, 105, 52, 89, 77, 73] };
     this.LS230 = { hours: [212, 245, 91, 187, 187, 192, 172, 136] };
-    // this.user = user;
     this.getMaxOfCourse();
     this.getBackendAvg();
     this.getMaxTotal();
@@ -155,19 +157,13 @@ class UserInput {
 
   addMoreAccurateToDom() {
     let moreAccurateText = `If you want a more accurate estimate and have finished JS109, write how many hours it took you here:`;
-    let li2 = new ElementMakerHTML('li', moreAccurateText, 'list');
-    li2.ele.id = 'js120hours';
+    let li2 = new ElementMakerHTML('li', moreAccurateText, 'list', 'js120hours');
     li2.appendElementToDOM();
-    let inputDiv = new ElementMakerHTML('div', '', 'list');
-    inputDiv.ele.id = 'inputDiv';
+    let inputDiv = new ElementMakerHTML('div', '', 'list', 'inputDiv');
     inputDiv.appendElementToDOM();
-    let input = new ElementMakerHTML('input', '', 'inputDiv');
-    input.ele.id = "numberInput";
-    input.ele.placeholder = "How many hours did JS109 take you?";
+    let input = new ElementMakerHTML('input', '', 'inputDiv', 'numberInput', '', "If you don't know, multiply avg hours per week by weeks spent studying.");
     input.appendElementToDOM();
-    let submitButton = new ElementMakerHTML('div', 'Submit', 'inputDiv');
-    submitButton.ele.className = 'submitbutton';
-    submitButton.ele.id = 'js120submitbutton';
+    let submitButton = new ElementMakerHTML('div', 'Submit', 'inputDiv', 'js120submitbutton', 'submitbutton');
     submitButton.appendElementToDOM();
   }
 }
