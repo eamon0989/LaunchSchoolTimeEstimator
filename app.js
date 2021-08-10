@@ -158,7 +158,7 @@ class UserInput {
   }
 
   addMoreAccurateToDom() {
-    let moreAccurateText = `If you want a more accurate estimate and have finished JS109, write how many hours it took you here:`;
+    let moreAccurateText = `If you want a more accurate estimate and have finished both JS101 and JS109, write how many hours it took you to complete both here:`;
     let li2 = new ElementMakerHTML('li', moreAccurateText, 'list', 'js120hours');
     li2.appendElementToDOM();
     let inputDiv = new ElementMakerHTML('div', '', 'list', 'inputDiv');
