@@ -48,8 +48,8 @@ body {
 }
 
 #inputDiv {
-  /* display: flex; */
-  display: none;
+  display: flex;
+  /* display: none; */
 }
 
 #numberInput {
@@ -58,7 +58,7 @@ body {
 }
 
 #js120hours {
-  display: none;
+  /* display: none; */
 }
 
 h1 {

@@ -11,6 +11,16 @@ class ElementMakerHTML {
   }
 }
 
+class DateMaker {
+  constructor(days) {
+    this.now = new Date();
+    this.now.setDate(this.now.getDate() + days);
+    this.now = this.now.toDateString();
+  }
+}
+
+let user;
+
 class Hours {
   constructor() {
     this.JS101 = { hours: [190, 149, 307, 113, 102, 165, 78] };
@@ -23,6 +33,7 @@ class Hours {
     this.LS202 = { hours: [78, 55, 160, 46, 92, 38] };
     this.LS215 = { hours: [75, 66, 60, 105, 52, 89, 77, 73] };
     this.LS230 = { hours: [212, 245, 91, 187, 187, 192, 172, 136] };
+    // this.user = user;
     this.getMaxOfCourse();
     this.getBackendAvg();
     this.getMaxTotal();
@@ -33,15 +44,17 @@ class Hours {
 
   getMaxOfCourse() {
     for (let prop in this) {
-      this[prop].max = Math.max(...this[prop].hours);
+      if (this[prop]) this[prop].max = Math.max(...this[prop].hours);
     }
   }
 
   getMaxTotal() {
     let max = 0;
     for (let prop in this) {
-      if (this[prop].max) {
-        max += this[prop].max;
+      if (this[prop]) {
+        if (this[prop].max) {
+          max += this[prop].max;
+        }
       }
     }
 
@@ -51,9 +64,11 @@ class Hours {
   getBackendAvg() {
     let courseAvg = 0;
     for (let prop in this) {
-      this[prop].average = Math.round(this[prop].hours
-        .reduce((acc, num) => acc + num) / this[prop].hours.length);
-      courseAvg += this[prop].average;
+      if (this[prop]) {
+        this[prop].average = Math.round(this[prop].hours
+          .reduce((acc, num) => acc + num) / this[prop].hours.length);
+        courseAvg += this[prop].average;
+      }
     }
 
     this.BackendAverage = courseAvg;
@@ -61,12 +76,14 @@ class Hours {
 
   addCourseListToDOM() {
     for (let prop in this) {
-      if (this[prop].average) {
-        let text = `${prop} takes on average ${this[prop].average
-        } hours to complete and the max on record is ${this[prop].max}.`;
+      if (this[prop]) {
+        if (this[prop].average) {
+          let text = `${prop} takes on average ${this[prop].average
+          } hours to complete and the max on record is ${this[prop].max}.`;
 
-        let li = new ElementMakerHTML('li', text, 'list');
-        li.appendElementToDOM();
+          let li = new ElementMakerHTML('li', text, 'list');
+          li.appendElementToDOM();
+        }
       }
     }
   }
@@ -84,17 +101,25 @@ class Hours {
     let li2 = new ElementMakerHTML('li', maxText, 'list');
     li2.appendElementToDOM();
   }
-}
 
-class DateMaker {
-  constructor(days) {
-    this.now = new Date();
-    this.now.setDate(this.now.getDate() + days);
-    this.now = this.now.toDateString();
+  computeMoreAccurate(js109Hours) {
+    let comparedToAvgJS109 = js109Hours / this.JS101.average;
+    this.addYourComputedAvgEstimateToDOM(comparedToAvgJS109);
+  }
+
+  addYourComputedAvgEstimateToDOM(comparedToAvgJS109) {
+    let hoursLeft = Math.round(this.BackendAverage * comparedToAvgJS109) - user.done;
+    let weeksLeft = Math.ceil(hoursLeft / user.hours);
+    let date = new DateMaker(weeksLeft * 7);
+    let yourAvgText = `Based on your input it will probably take you another ${hoursLeft
+      } hours or ${weeksLeft} weeks. This means that you would finish on ${date.now}.`;
+    let yourAvgEle = new ElementMakerHTML('li', yourAvgText,'list');
+    yourAvgEle.appendElementToDOM();
   }
 }
 
 let launchSchoolHours = new Hours();
+
 
 class UserInput {
   constructor() {
@@ -150,7 +175,7 @@ class UserInput {
 // gets user input
 function getUserInput() {
   if (!validateHoursPerWeekInput('hoursperweek')) return false;
-  let user = new UserInput();
+  user = new UserInput();
 
   let date = new DateMaker(user.avgWeeks * 7);
   user.addYourAvgToDOM(date);
@@ -166,7 +191,7 @@ function getUserInput() {
 function getJS120Input() {
   if (!validateHoursPerWeekInput('numberInput')) return false;
   let js120hours = Number(document.getElementById('numberInput').value);
-  console.log(js120hours);
+  launchSchoolHours.computeMoreAccurate(js120hours);
 }
 
 function validateHoursPerWeekInput(element) {
