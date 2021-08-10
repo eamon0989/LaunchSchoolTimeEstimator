@@ -5,8 +5,8 @@ class ElementMakerHTML {
     this.ele.appendChild(this.textNode);
     this.parentElement = document.getElementById(parentElement);
     if (id) this.ele.id = id;
-    this.ele.className = className;
-    this.ele.placeholder = placeholder;
+    if (className) this.ele.className = className;
+    if (placeholder) this.ele.placeholder = placeholder;
   }
 
   appendElementToDOM() {
@@ -93,14 +93,14 @@ class Hours {
   addAvgToDom() {
     let avgText = `The average time to finish the JavaScript track is: ${
       this.BackendAverage} hours.`;
-    let li = new ElementMakerHTML('li', avgText, 'list');
+    let li = new ElementMakerHTML('li', avgText, 'courseList');
     li.appendElementToDOM();
   }
 
   addMaxToDom() {
     let maxText = `The maximum time on record to finish the JavaScript track is: ${
       this.BackendMax} hours.`;
-    let li2 = new ElementMakerHTML('li', maxText, 'list');
+    let li2 = new ElementMakerHTML('li', maxText, 'courseList');
     li2.appendElementToDOM();
   }
 
@@ -207,14 +207,32 @@ function scrollToBottom() {
   window.scrollTo(0, document.body.scrollHeight);
 }
 
+function hideButton() {
+  document.getElementById('js120submitbutton').style.display = 'none';
+}
+
+function resetButton() {
+  let li = new ElementMakerHTML('div', '', 'list', 'buttonDiv');
+  li.appendElementToDOM();
+  let reset = new ElementMakerHTML('div', 'Reset', 'buttonDiv', 'resetButton', 'submitbutton');
+  reset.appendElementToDOM();
+  document.getElementById('resetButton').addEventListener('click', reloadPage);
+}
+
 function hideList() {
   if (document.getElementById('hoursperweek').value) {
     let list = document.getElementById('courseList');
     list.style.display = 'none';
+    document.getElementById('js120submitbutton').addEventListener('click', hideButton);
+    document.getElementById('js120submitbutton').addEventListener('click', resetButton);
+    document.getElementById('js120submitbutton').addEventListener('click', scrollToBottom);
   }
+}
+
+function reloadPage() {
+  location.reload();
 }
 
 document.getElementById('submitbutton').addEventListener('click', getUserInput);
 document.getElementById('submitbutton').addEventListener('click', scrollToBottom);
 document.getElementById('submitbutton').addEventListener('click', hideList);
-// document.getElementById('js120submitbutton').addEventListener('click', scrollToBottom);

@@ -57,14 +57,6 @@ body {
   box-sizing:border-box;
 }
 
-#js120hours {
-  /* display: none; */
-}
-
-/* #courseList {
-  display: grid;
-} */
-
 h1 {
     display: grid;
     grid-column: 2;
@@ -222,4 +214,14 @@ li:hover {
   display: flex;
   flex-direction: row;
   margin: 0px;
+}
+
+#buttonDiv {
+  display: grid;
+  place-content: center;
+}
+
+#resetButton {
+  background-color: #ff6b6b;
+  padding-inline: 1.5rem;
 }
