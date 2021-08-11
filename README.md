@@ -9,3 +9,6 @@ here written by Jack!
 https://bird-printer-8c0.notion.site/How-to-contribute-to-LS-Time-Estimate-ac655f12392e43b5b88620b9af1debec
 
 Check out the 'issues' tab for things that need fixing!
+
+If you want to add something that's not on the issues list or you have an idea for the project,
+send me a PM and let me know :)
