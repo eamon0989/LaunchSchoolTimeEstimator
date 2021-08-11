@@ -1,10 +1,10 @@
 * {
   margin: 1px 0px;
-	padding: 0;
-	font: inherit;
-	vertical-align: baseline;
+  padding: 0;
+  font: inherit;
+  vertical-align: baseline;
   font-size: 18px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 @media only screen and (max-width: 500px) {
@@ -14,29 +14,29 @@
 }
 
 .material-icons {
-    font-family: 'Material Icons';
-    font-weight: normal;
-    font-style: normal;
-    font-size: 24px;  /* Preferred icon size */
-    display: none;
-    line-height: 1;
-    text-transform: none;
-    letter-spacing: normal;
-    word-wrap: normal;
-    white-space: nowrap;
-    direction: ltr;
-  
-    /* Support for all WebKit browsers. */
-    -webkit-font-smoothing: antialiased;
-    /* Support for Safari and Chrome. */
-    text-rendering: optimizeLegibility;
-  
-    /* Support for Firefox. */
-    -moz-osx-font-smoothing: grayscale;
-  
-    /* Support for IE. */
-    font-feature-settings: 'liga';
-  }
+  font-family: "Material Icons";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px; /* Preferred icon size */
+  display: none;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: "liga";
+}
 
 body {
   display: grid;
@@ -44,7 +44,7 @@ body {
 }
 
 #wrapper {
-    grid-column: 2;
+  grid-column: 2;
 }
 
 #inputDiv {
@@ -54,36 +54,38 @@ body {
 
 #numberInput {
   padding: 1rem 1rem;
-  box-sizing:border-box;
+  box-sizing: border-box;
 }
 
 h1 {
-    display: grid;
-    grid-column: 2;
-    text-align: center;
-    font-size: 2.3rem;
-    padding: 1.5rem ;
+  display: grid;
+  grid-column: 2;
+  text-align: center;
+  font-size: 2.3rem;
+  padding: 1.5rem;
 }
 
 form {
-    display:flex;
-    flex-direction:column;
-    width: 100%;
-    grid-column: 2;
-    margin: 0px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  grid-column: 2;
+  margin: 0px;
 }
 
-button, .submitbutton {
-    border-radius: 3px;
-    outline: none;
-    border: 1px solid #ccc;
-    background-color: #F6F6F6;
-    cursor: pointer;
-    /* width: 15%; */
-    padding: 1rem;
+button,
+.submitbutton {
+  border-radius: 3px;
+  outline: none;
+  border: 1px solid #ccc;
+  background-color: #f6f6f6;
+  cursor: pointer;
+  /* width: 15%; */
+  padding: 1rem;
 }
 
-button:hover, .submitbutton:hover {
+button:hover,
+.submitbutton:hover {
   background-color: #2f94fa9d;
 }
 
@@ -93,115 +95,114 @@ button:hover, .submitbutton:hover {
 }
 
 .inputWrapper {
-    place-content: center;
-    grid-column: 2;
-    margin: 0.2rem;
+  place-content: center;
+  grid-column: 2;
+  margin: 0.2rem;
 }
 
 input {
-    padding: 1rem 1rem;
-    flex-grow:2;
-    outline: none;
-    border-radius: 3px;
-    border: 1px solid #ccc;
-    transition: all 0.3s ease;
-    width: 100%;
+  padding: 1rem 1rem;
+  flex-grow: 2;
+  outline: none;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  transition: all 0.3s ease;
+  width: 100%;
 }
 
-input:focus{
-  border-color: #2F95FA;
+input:focus {
+  border-color: #2f95fa;
 }
 
 #addToDo {
-    padding: 0rem 0.9rem;
-    width: 3.5rem;
-    background-color: #d1deee;
+  padding: 0rem 0.9rem;
+  width: 3.5rem;
+  background-color: #d1deee;
 }
 
 .li {
-    display:flex;
-    flex-direction:row;
-    grid-column: 2;
-    margin: 0.2rem;
+  display: flex;
+  flex-direction: row;
+  grid-column: 2;
+  margin: 0.2rem;
 }
 
 .liDivAnimation {
-    display:flex;
-    flex-direction:row;
-    grid-column: 2;
-    margin: 0.2rem;
-    animation-duration: 0.5s;
-    animation-name: slideOut;
+  display: flex;
+  flex-direction: row;
+  grid-column: 2;
+  margin: 0.2rem;
+  animation-duration: 0.5s;
+  animation-name: slideOut;
 }
 
 li {
   grid-column: 2;
   list-style-type: none;
   padding: 1rem;
-  background-color: #F6F6F6;
+  background-color: #f6f6f6;
   border: solid 1px transparent;
-  overflow: hidden;  
+  overflow: hidden;
   border-radius: 3px;
   flex-grow: 2;
 }
-@media (hover: hover) { 
-    .liDiv:hover > .buttonDiv {
-        display: flex;
-    }
- }
+@media (hover: hover) {
+  .liDiv:hover > .buttonDiv {
+    display: flex;
+  }
+}
 
 li:hover {
-    border: 1px solid #333333;
-    overflow: hidden;  
+  border: 1px solid #333333;
+  overflow: hidden;
 }
 
 .buttonDiv {
-    grid-column: 2;
-    margin: 0px;
-    justify-content: center;
-    align-items: center;
-    width: 3.5rem;
-    background-color: #ff6b6b;
-    border-radius: 3px;
-    outline: none;
-    border: 1px solid #ccc;
-    display: none;
-    visibility: none;
-    cursor: pointer;
+  grid-column: 2;
+  margin: 0px;
+  justify-content: center;
+  align-items: center;
+  width: 3.5rem;
+  background-color: #ff6b6b;
+  border-radius: 3px;
+  outline: none;
+  border: 1px solid #ccc;
+  display: none;
+  visibility: none;
+  cursor: pointer;
 }
 
 .checked {
-    text-decoration: line-through;
+  text-decoration: line-through;
 }
 
-#resetWrapper{
-    place-content: center;
-    display: grid;
+#resetWrapper {
+  place-content: center;
+  display: grid;
 }
 
 #reset {
-    padding: 1rem;
+  padding: 1rem;
 }
 
 #reset:hover {
-    background-color: #ff6b6b;
-
+  background-color: #ff6b6b;
 }
 
 @keyframes slideOut {
-    from {
-        margin-left: 0%;
-        width: 100%;
-        opacity:1;
-      }
-      90% {
-        opacity: 0;
-      }
-      to {
-        margin-left: 100%;
-        width: 100%;
-        opacity:0;
-      }
+  from {
+    margin-left: 0%;
+    width: 100%;
+    opacity: 1;
+  }
+  90% {
+    opacity: 0;
+  }
+  to {
+    margin-left: 100%;
+    width: 100%;
+    opacity: 0;
+  }
 }
 
 #line1 {
