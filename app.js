@@ -11,8 +11,11 @@ class ElementMakerHTML {
    */
   constructor(elementType, text, parentElement, id, className, placeholder) {
     this.ele = document.createElement(elementType);
-    this.textNode = document.createTextNode(text);
-    this.ele.appendChild(this.textNode);
+    if (text) {
+      this.textNode = document.createTextNode(text);
+      this.ele.appendChild(this.textNode);
+    }
+
     this.parentElement = document.getElementById(parentElement);
     if (id) this.ele.id = id;
     if (className) this.ele.className = className;
