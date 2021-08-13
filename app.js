@@ -57,6 +57,7 @@ class Hours {
     this.getBackendAverage();
     this.getFrontendAverage();
     this.getMaxTotal();
+    this.addCompletedCoursesQuestionsToDOM();
     this.addCourseListToDOM();
     this.addBackendAverageToDOM();
     this.addFrontendAveragetoDom();
@@ -180,6 +181,40 @@ class Hours {
     let yourAvgEle = new ElementMakerHTML('li', yourAvgText,'list');
     yourAvgEle.appendElementToDOM();
   }
+
+  addCompletedCoursesQuestionsToDOM() {
+    let text = `If you have finished any of these courses, please input how many hours it took you. Otherwise, click the 'view rough average' button below.`;
+
+    let li = new ElementMakerHTML('li', text, 'initialDiv');
+    li.appendElementToDOM();
+    let count = 0;
+    for (let prop in this) {
+      if (this[prop]) {
+        if (this[prop].average) {
+          let text = `How many hours did it take you to finish ${prop}?`;
+          let div = new ElementMakerHTML('div', '', 'questions', `div${count}`, 'flexDiv');
+          div.appendElementToDOM();
+          let liDiv = new ElementMakerHTML('div', '', `div${count}`, `li${count}`, 'smallLi');
+          liDiv.appendElementToDOM();
+          let li = new ElementMakerHTML('div', text, `li${count}`, '', 'innerLi');
+          li.appendElementToDOM();
+          let input = new ElementMakerHTML('input', text, `li${count}`, '', 'smallLiInput');
+          input.appendElementToDOM();
+          count += 1;
+        }
+      }
+    }
+    let text2 = `Click submit when finished.`;
+
+    let div = new ElementMakerHTML('div', '', 'questions', `submitOuterDiv`, 'flexDiv');
+    div.appendElementToDOM();
+    let liDiv = new ElementMakerHTML('div', '', `submitOuterDiv`, `submitInnerDiv`, 'smallLi');
+    liDiv.appendElementToDOM();
+    let li1 = new ElementMakerHTML('div', text2, `submitInnerDiv`, '', 'innerLi');
+    li1.appendElementToDOM();
+    let submitButton = new ElementMakerHTML('div', 'Submit', 'submitOuterDiv', 'js120submitbutton', 'submitbutton');
+    submitButton.appendElementToDOM();
+  }
 }
 
 let launchSchoolHours = new Hours();
@@ -292,6 +327,13 @@ function hideList() {
 function reloadPage() {
   location.reload();
 }
+
+function skipInput() {
+  document.getElementById('initialDiv').style.display = 'none';
+  document.getElementById('mainbody').style.display = 'block';
+}
+
+document.getElementById('skipButton').addEventListener('click', skipInput);
 
 document.getElementById('submitbutton').addEventListener('click', getUserInput);
 document.getElementById('submitbutton').addEventListener('click', scrollToBottom);
