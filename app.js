@@ -53,9 +53,13 @@ class Hours {
     this.LS215 = { hours: [75, 66, 60, 105, 52, 89, 77, 73] };
     this.LS230 = { hours: [212, 245, 91, 187, 187, 192, 172, 136] };
     this.getMaxOfCourse();
-    this.getBackendAvg();
+    this.getCoreAverage();
+    this.getBackendAverage();
+    this.getFrontendAverage();
     this.getMaxTotal();
     this.addCourseListToDOM();
+    this.addBackendAverageToDOM();
+    this.addFrontendAveragetoDom();
     this.addAvgToDom();
     this.addMaxToDom();
   }
@@ -76,10 +80,10 @@ class Hours {
       }
     }
 
-    this.BackendMax = max;
+    this.coreMax = max;
   }
 
-  getBackendAvg() {
+  getCoreAverage() {
     let courseAvg = 0;
     for (let prop in this) {
       if (this[prop]) {
@@ -89,7 +93,47 @@ class Hours {
       }
     }
 
-    this.BackendAverage = courseAvg;
+    this.coreAverage = courseAvg;
+  }
+
+  getBackendAverage() {
+    let backendAvg = 0;
+    for (let prop in this) {
+      if (this[prop] && prop.startsWith('JS')) {
+        this[prop].average = Math.round(this[prop].hours
+          .reduce((acc, num) => acc + num) / this[prop].hours.length);
+        backendAvg += this[prop].average;
+      }
+    }
+
+    this.backendAverage = backendAvg;
+  }
+
+  addBackendAverageToDOM() {
+    let avgText = `The average time to finish the JavaScript backend track is: ${
+      this.backendAverage} hours.`;
+    let li = new ElementMakerHTML('li', avgText, 'courseList');
+    li.appendElementToDOM();
+  }
+
+  getFrontendAverage() {
+    let frontendAvg = 0;
+    for (let prop in this) {
+      if (this[prop] && prop.startsWith('LS')) {
+        this[prop].average = Math.round(this[prop].hours
+          .reduce((acc, num) => acc + num) / this[prop].hours.length);
+        frontendAvg += this[prop].average;
+      }
+    }
+
+    this.frontendAverage = frontendAvg;
+  }
+
+  addFrontendAveragetoDom() {
+    let avgText = `The average time to finish the JavaScript frontend track is: ${
+      this.frontendAverage} hours.`;
+    let li = new ElementMakerHTML('li', avgText, 'courseList');
+    li.appendElementToDOM();
   }
 
   addCourseListToDOM() {
@@ -108,14 +152,14 @@ class Hours {
 
   addAvgToDom() {
     let avgText = `The average time to finish the JavaScript track is: ${
-      this.BackendAverage} hours.`;
+      this.coreAverage} hours.`;
     let li = new ElementMakerHTML('li', avgText, 'courseList');
     li.appendElementToDOM();
   }
 
   addMaxToDom() {
     let maxText = `The maximum time on record to finish the JavaScript track is: ${
-      this.BackendMax} hours.`;
+      this.coreMax} hours.`;
     let li2 = new ElementMakerHTML('li', maxText, 'courseList');
     li2.appendElementToDOM();
   }
@@ -126,7 +170,7 @@ class Hours {
   }
 
   addYourComputedAvgEstimateToDOM(comparedToAvgJS109) {
-    let hoursLeft = Math.round(this.BackendAverage * comparedToAvgJS109)
+    let hoursLeft = Math.round(this.coreAverage * comparedToAvgJS109)
     - user.done;
     let weeksLeft = Math.ceil(hoursLeft / user.hours);
     let date = new DateMaker(weeksLeft * 7);
@@ -145,8 +189,8 @@ class UserInput {
   constructor() {
     this.hours = this.getHoursPerWeek();
     this.done = this.getTotalHoursDone();
-    this.total = launchSchoolHours.BackendAverage - this.done;
-    this.maxTotal = launchSchoolHours.BackendMax - this.done;
+    this.total = launchSchoolHours.coreAverage - this.done;
+    this.maxTotal = launchSchoolHours.coreMax - this.done;
     this.avgWeeks = Math.round((this.total / this.hours));
     this.maxWeeks = Math.round((this.maxTotal / this.hours));
   }
