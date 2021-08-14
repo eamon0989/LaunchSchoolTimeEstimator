@@ -154,15 +154,15 @@ button,
   border-radius: 3px;
   outline: none;
   border: 1px solid #ccc;
-  background-color: #e8f0fe;
+  background-color: #9fbef3;
   cursor: pointer;
   margin-left: 2px;
-  padding: 1rem 1.4rem;
+  padding: 1rem 1.6rem;
 }
 
 button:hover,
 .submitbutton:hover {
-  background-color: rgb(174, 191, 219);
+  background-color: #6d95da;
 }
 
 #listdiv {
