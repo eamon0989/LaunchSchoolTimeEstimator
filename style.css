@@ -154,9 +154,9 @@ button,
   border-radius: 3px;
   outline: none;
   border: 1px solid #ccc;
-  background-color: rgb(232, 240, 254);
+  background-color: #e8f0fe;
   cursor: pointer;
-  /* width: 15%; */
+  margin-left: 2px;
   padding: 1rem 1.4rem;
 }
 
