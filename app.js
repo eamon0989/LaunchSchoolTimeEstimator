@@ -198,9 +198,11 @@ class Hours {
   }
 
   addCompletedCoursesQuestionsToDOM() {
-    let text = `If you have finished any of the following courses, please input how many hours it took you. Leave any courses you have NOT yet finished empty. Otherwise, click the 'Submit' button below.`;
+    let text = `If you have finished any of the following courses, please input how many hours it took you. Leave any courses you have NOT yet finished empty. 
+    
+    Input the hours from both the course and exam unit. E.g. JS109 = JS101 + JS109.`;
 
-    let li = new ElementMakerHTML('li', text, 'inputexplanationdiv');
+    let li = new ElementMakerHTML('li', text, 'questions');
     li.appendElementToDOM();
     // let text1 = `NOTE: Input the hours from both the course and exam unit. E.g. JS109 = JS101 + JS109.`;
 
@@ -344,7 +346,20 @@ function showDetails() {
   document.getElementById('moreDetails').style.display = 'grid';
 }
 
+function showInputField() {
+  document.getElementById('questions').style.display = 'block';
+  document.getElementById('submitInnerDiv').style.display = 'flex';
+  document.getElementById('haveyoufinishedjs109').style.display = 'none';
+}
+
+function showSubmitButton() {
+  document.getElementById('haveyoufinishedjs109').style.display = 'none';
+  document.getElementById('submitInnerDiv').style.display = 'flex';
+}
+
 // document.getElementById('skipButton').addEventListener('click', changeView);
+document.getElementById('yesfinished').addEventListener('click', showInputField);
+document.getElementById('notfinished').addEventListener('click', showSubmitButton);
 document.getElementById('coursehourssubmitbutton').addEventListener('click', getUserInput);
 document.getElementById('coursehourssubmitbutton').addEventListener('click', changeView);
 document.getElementById('moredetailsbutton').addEventListener('click', showDetails);
