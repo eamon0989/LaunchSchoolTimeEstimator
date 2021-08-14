@@ -1,0 +1,6 @@
+POST http://localhost:3000/api/courses/ 
+Content-Type: application/json 
+{
+  "course": 109,
+  "hours":100
+}

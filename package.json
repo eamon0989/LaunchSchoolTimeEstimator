@@ -1,0 +1,31 @@
+{
+  "name": "lstimeestimate",
+  "version": "1.0.0",
+  "description": "Welcome to the Launch School Time Estimator. This project was created by and is maintained by Launch School Students.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cross-env NODE_ENV=production node index.js",
+    "dev": "cross-env NODE_ENV=development nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/medic-code/lstimeestimate.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/medic-code/lstimeestimate/issues"
+  },
+  "homepage": "https://github.com/medic-code/lstimeestimate#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.13.7",
+    "mongoose-unique-validator": "^2.0.3",
+    "nodemon": "^2.0.12"
+  }
+}
