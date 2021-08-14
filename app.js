@@ -269,7 +269,15 @@ class UserInput {
 
 // gets user input
 function getUserInput() {
-  if (!validateHoursPerWeekInput('hoursperweek')) return false;
+  if (!validateHoursPerWeekInput('hoursperweek')) {
+    let error = new ElementMakerHTML('li', 'Please insert a valid number.','line1', 'errormessage');
+    error.appendElementToDOM();
+    return false;
+  } else if (!validateHoursPerWeekInput('hoursdone')) {
+    let error = new ElementMakerHTML('li', 'Please insert a valid number.','line2', 'errormessage');
+    error.appendElementToDOM();
+    return false;
+  } 
 
   let hoursPerWeek = Number(document.getElementById('hoursperweek').value);
   let done = Number(document.getElementById('hoursdone').value);
@@ -307,7 +315,6 @@ function validateHoursPerWeekInput(element) {
   let input = Number(document.getElementById(element).value);
 
   if (Number.isNaN(input) || input <= 0) {
-    alert('Please input how many hours you study per week.');
     return false;
   }
 
@@ -335,7 +342,7 @@ function reloadPage() {
 }
 
 function changeView() {
-  if (Number(document.getElementById('hoursperweek').value) > 0) {
+  if (Number(document.getElementById('hoursperweek').value) > 0 && Number(document.getElementById('hoursdone').value) > 0) {
     document.getElementById('initialDiv').style.display = 'none';
     document.getElementById('mainbody').style.display = 'grid';
     resetButton();
