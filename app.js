@@ -185,7 +185,7 @@ class Hours {
     let date = new DateMaker(weeksLeft * 7);
 
     let yourAvgText = `Based on your input it will probably take you another ${hoursLeft
-    } hours or ${weeksLeft} weeks. This means that you would finish on ${date.now}.`;
+    } hours. At ${user.hours} hours per week it would take you around ${weeksLeft} weeks. This means that you would finish around ${date.now}.`;
     let yourAvgEle = new ElementMakerHTML('li', yourAvgText,'courseList');
     yourAvgEle.appendElementToDOM();
   }
@@ -254,14 +254,14 @@ class UserInput {
 
   addYourAvgToDOM(date) {
     let yourAvgText = `Based on the average it will probably take you another ${
-      this.totalHoursLeftBasedOnAvg} hours or ${this.weeksLeftBasedOnAvg} weeks. This means that you would finish on ${date.now}`;
+      this.totalHoursLeftBasedOnAvg} hours. At ${user.hours} hours per week it would take you around ${this.weeksLeftBasedOnAvg} weeks. This means that you would finish on ${date.now}`;
     let yourAvgEle = new ElementMakerHTML('li', yourAvgText,'courseList');
     yourAvgEle.appendElementToDOM();
   }
 
   addYourMaxEstimateToDOM(maxDate) {
     let yourMaxText = `Based on the maximum time on record it could take you another ${
-      this.maxtotalHoursLeftBasedOnAvg} hours or ${this.maxWeeksLeftBasedOnMaxRecord} weeks. This means that you would finish on ${maxDate.now}`;
+      this.maxtotalHoursLeftBasedOnAvg} hours.  At ${user.hours} hours per week it would take you around ${this.maxWeeksLeftBasedOnMaxRecord} weeks. This means that you would finish on ${maxDate.now}`;
     let yourMaxEle = new ElementMakerHTML('li', yourMaxText,'courseList');
     yourMaxEle.appendElementToDOM();
   }
