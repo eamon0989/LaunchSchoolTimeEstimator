@@ -138,7 +138,7 @@ class Hours {
       if (this[prop]) {
         if (this[prop].average) {
           let text = `${prop} takes on average ${this[prop].average
-          } hours to complete and the max on record is ${this[prop].max}.`;
+          } hours to complete and the max on record is ${this[prop].max}. It makes up about ${Math.round((this[prop].average / this.coreAverage) * 100)}% of core.`;
 
           let li = new ElementMakerHTML('li', text, 'courseListMoreDetails');
           li.appendElementToDOM();
