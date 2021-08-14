@@ -43,6 +43,10 @@ body {
   grid-template-columns: 1fr min(70ch, calc(100% - 16px)) 1fr;
 }
 
+#mainbody {
+  display: none;
+}
+
 #wrapper {
   grid-column: 2;
 }
@@ -55,6 +59,86 @@ body {
 #numberInput {
   padding: 1rem 1rem;
   box-sizing: border-box;
+}
+
+#yesnodiv {
+  display: flex;
+  flex-direction: row;
+  /* margin: 0px; */
+  /* padding: 1rem 1rem; */
+  /* flex-grow: 2; */
+  outline: none;
+  border-radius: 3px;
+  /* border: 1px solid #ccc; */
+  /* width: 100%; */
+}
+
+#flex {
+  display: flex;
+  /* padding: rem; */
+}
+
+#js109yes {
+  margin-left: 2px;
+}
+
+#mainbody {
+  grid-column: 2;
+}
+
+#moreDetails {
+  display: none;
+  grid-column: 2;
+}
+
+.yesnosubmitbutton {
+  display: flex;
+  border-radius: 3px;
+  outline: none;
+  border: 1px solid #ccc;
+  /* background-color: #f6f6f6; */
+  cursor: pointer;
+  /* width: 15%; */
+  padding: 1rem 1.5rem;
+  /* margin: 1px; */
+}
+
+.smallLi {
+  grid-column: 2;
+  list-style-type: none;
+  padding: 0rem;
+  background-color: #f6f6f6;
+  border: solid 1px transparent;
+  overflow: hidden;
+  border-radius: 3px;
+  flex-grow: 2;
+}
+
+.innerLi {
+  grid-column: 2;
+  list-style-type: none;
+  padding: 1rem;
+  background-color: #f6f6f6;
+  border: solid 1px transparent;
+  overflow: hidden;
+  border-radius: 3px;
+  flex-grow: 2;
+  width: 80%;
+}
+
+.flexDiv {
+  display: flex;
+  flex-direction: row;
+}
+
+.smallLiInput {
+  display: flex;
+  width: 10%;
+
+}
+
+.smallLi {
+  display: flex;
 }
 
 h1 {

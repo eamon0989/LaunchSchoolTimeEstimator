@@ -9,34 +9,64 @@
 </head>
 <body id="body">
   <div id="wrapper">
-  <h1>How long it will take you to finish JS core?</h1>
-  
-  <div id="mainbody">
-    <div>
+    <h1>How long it will take you to finish JS core?</h1>
+    
+    <div id="initialDiv">
+
       <form>
         <div id='line1'>
           <input type="hoursperweek" placeholder="How many hours do you study per week?"
           id="hoursperweek" name="hoursperweek" minlength="1" size="10">
         </div>
+
         <div id='line2'>
-          <input type="hoursdone" placeholder="How many hours have you done?"
+          <input type="hoursdone" placeholder="How many hours have you done in total?"
           id="hoursdone" name="hoursdone">
-        <div role="button" class="submitbutton" id="submitbutton">Submit</div>
-      </div>
+        </div>
+        <div id="inputexplanationdiv">
+        </div>
       </form>
+
+      <form id="questions">
+      </form>
+      
+      <div id="submitInnerDiv" class="smallLi">
+        <div class="innerLi">
+          Click submit when finished.
+        </div>
+        <div id="coursehourssubmitbutton" class="submitbutton">
+          Submit
+        </div>
+      </div>
     </div>
 
+  </div>
+
+  <div id="mainbody">
     <div id="listdiv">
       <ul id="courseList">
       </ul>
       <ul id="list">
+        <div id="moreDetailsDiv" class="smallLi">
+          <div class="innerLi">
+            Click here for more details on each course.
+          </div>
+          <div id="moredetailsbutton" class="submitbutton">
+            Details
+          </div>
+        </div>
       </ul>
     </div>
   </div>
 
   <div id="insertText">
   </div>
-</div>
+
+  <div id="moreDetails">
+    <ul id="courseListMoreDetails">
+    </ul>
+  </div>
+
 </body>
 
 <script src="app.js"></script>

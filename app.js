@@ -42,26 +42,23 @@ let user;
 
 class Hours {
   constructor() {
-    this.JS101 = { hours: [190, 149, 307, 113, 102, 165, 78] };
-    this.JS120 = { hours: [115, 175, 85, 131, 63, 87, 95, 90] };
-    this.JS130 = { hours: [55, 80, 155, 69, 60, 36, 50, 58] };
-    this.JS170 = { hours: [30, 26, 30, 38, 17, 35, 37, 9] };
+    this.JS109 = { hours: [190, 149, 307, 113, 102, 165, 78] };
+    this.JS129 = { hours: [115, 175, 85, 131, 63, 87, 95, 90] };
+    this.JS139 = { hours: [55, 80, 155, 69, 60, 36, 50, 58] };
+    this.JS171 = { hours: [30, 26, 30, 38, 17, 35, 37, 9] };
     this.JS175 = { hours: [30, 73, 90, 58, 24, 76, 35, 52] };
-    this.JS180 = { hours: [83, 49, 48, 58, 25, 27, 51, 51] };
+    this.LS181 = { hours: [83, 49, 48, 58, 25, 27, 51, 51] };
     this.JS185 = { hours: [8, 10, 15, 15, 7, 12, 10, 16] };
     this.LS202 = { hours: [78, 55, 160, 46, 92, 38] };
-    this.LS215 = { hours: [75, 66, 60, 105, 52, 89, 77, 73] };
-    this.LS230 = { hours: [212, 245, 91, 187, 187, 192, 172, 136] };
+    this.LS216 = { hours: [75, 66, 60, 105, 52, 89, 77, 73] };
+    this.LS239 = { hours: [212, 245, 91, 187, 187, 192, 172, 136] };
     this.getMaxOfCourse();
     this.getCoreAverage();
     this.getBackendAverage();
     this.getFrontendAverage();
     this.getMaxTotal();
+    this.addCompletedCoursesQuestionsToDOM();
     this.addCourseListToDOM();
-    this.addBackendAverageToDOM();
-    this.addFrontendAveragetoDom();
-    this.addAvgToDom();
-    this.addMaxToDom();
   }
 
   getMaxOfCourse() {
@@ -143,7 +140,7 @@ class Hours {
           let text = `${prop} takes on average ${this[prop].average
           } hours to complete and the max on record is ${this[prop].max}.`;
 
-          let li = new ElementMakerHTML('li', text, 'courseList');
+          let li = new ElementMakerHTML('li', text, 'courseListMoreDetails');
           li.appendElementToDOM();
         }
       }
@@ -164,12 +161,27 @@ class Hours {
     li2.appendElementToDOM();
   }
 
-  computeMoreAccurate(js109Hours) {
-    let comparedToAvgJS109 = js109Hours / this.JS101.average;
-    this.addYourComputedAvgEstimateToDOM(comparedToAvgJS109);
+  computeMoreAccurate() {
+    console.log(user);
+    console.log(launchSchoolHours);
+    let computed = [];
+    for (let prop in user) {
+      if (prop.startsWith('JS') || prop.startsWith('LS')) {
+        if (user[prop] > 0) {
+          console.log(launchSchoolHours[prop].average, user[prop]);
+          computed.push(user[prop] / launchSchoolHours[prop].average);
+        }
+      }
+    }
+
+    let length = computed.length;
+    let accurateEstimatePercentage = computed.reduce((acc, num) => acc + num)
+      / length;
+    this.addYourComputedAvgEstimateToDOM(accurateEstimatePercentage);
   }
 
   addYourComputedAvgEstimateToDOM(comparedToAvgJS109) {
+    console.log(this.coreAverage, comparedToAvgJS109, user.done);
     let hoursLeft = Math.round(this.coreAverage * comparedToAvgJS109)
     - user.done;
     let weeksLeft = Math.ceil(hoursLeft / user.hours);
@@ -177,22 +189,59 @@ class Hours {
 
     let yourAvgText = `Based on your input it will probably take you another ${hoursLeft
     } hours or ${weeksLeft} weeks. This means that you would finish on ${date.now}.`;
-    let yourAvgEle = new ElementMakerHTML('li', yourAvgText,'list');
+    let yourAvgEle = new ElementMakerHTML('li', yourAvgText,'courseList');
     yourAvgEle.appendElementToDOM();
+  }
+
+  computeMoreAccurateBasedOnCourseHours() {
+
+  }
+
+  addCompletedCoursesQuestionsToDOM() {
+    let text = `If you have finished any of the following courses, please input how many hours it took you. Leave any courses you have NOT yet finished empty. Otherwise, click the 'Submit' button below.`;
+
+    let li = new ElementMakerHTML('li', text, 'inputexplanationdiv');
+    li.appendElementToDOM();
+    // let text1 = `NOTE: Input the hours from both the course and exam unit. E.g. JS109 = JS101 + JS109.`;
+
+    // let li1 = new ElementMakerHTML('li', text1, 'inputexplanationdiv');
+    // li1.appendElementToDOM();
+    let count = 0;
+    for (let prop in this) {
+      if (this[prop]) {
+        if (this[prop].average) {
+          let text = `How many hours did it take you to finish ${prop}?`;
+          let div = new ElementMakerHTML('div', '', 'questions', `hoursInputDiv${count}`, 'flexDiv');
+          div.appendElementToDOM();
+          let input = new ElementMakerHTML('input', '', `hoursInputDiv${count}`, `hoursInput${count}`, 'smallLiInput', `How many hours did it take you to finish ${prop}?`);
+          input.appendElementToDOM();
+          count += 1;
+        }
+      }
+    }
   }
 }
 
 let launchSchoolHours = new Hours();
 
-
 class UserInput {
-  constructor() {
-    this.hours = this.getHoursPerWeek();
-    this.done = this.getTotalHoursDone();
-    this.total = launchSchoolHours.coreAverage - this.done;
-    this.maxTotal = launchSchoolHours.coreMax - this.done;
-    this.avgWeeks = Math.round((this.total / this.hours));
-    this.maxWeeks = Math.round((this.maxTotal / this.hours));
+  constructor(hoursPerWeek, done, JS109, JS129, JS139, LS171, JS175, LS181, JS185, LS202, LS216, JS239) {
+    this.hours = hoursPerWeek;
+    this.done = done;
+    this.totalHoursLeftBasedOnAvg = launchSchoolHours.coreAverage - this.done;
+    this.maxtotalHoursLeftBasedOnAvg = launchSchoolHours.coreMax - this.done;
+    this.weeksLeftBasedOnAvg = Math.round((this.totalHoursLeftBasedOnAvg / this.hours));
+    this.maxWeeksLeftBasedOnMaxRecord = Math.round((this.maxtotalHoursLeftBasedOnAvg / this.hours));
+    this.JS109 = JS109;
+    this.JS129 = JS129;
+    this.JS139 = JS139;
+    this.LS171 = LS171;
+    this.JS175 = JS175;
+    this.LS181 = LS181;
+    this.JS185 = JS185;
+    this.LS202 = LS202;
+    this.LS216 = LS216;
+    this.JS239 = JS239;
   }
 
   getHoursPerWeek() {
@@ -205,51 +254,52 @@ class UserInput {
 
   addYourAvgToDOM(date) {
     let yourAvgText = `Based on the average it will probably take you another ${
-      this.total} hours or ${this.avgWeeks} weeks. This means that you would finish on ${date.now}`;
-    let yourAvgEle = new ElementMakerHTML('li', yourAvgText,'list');
+      this.totalHoursLeftBasedOnAvg} hours or ${this.weeksLeftBasedOnAvg} weeks. This means that you would finish on ${date.now}`;
+    let yourAvgEle = new ElementMakerHTML('li', yourAvgText,'courseList');
     yourAvgEle.appendElementToDOM();
   }
 
   addYourMaxEstimateToDOM(maxDate) {
     let yourMaxText = `Based on the maximum time on record it could take you another ${
-      this.maxTotal} hours or ${this.maxWeeks} weeks. This means that you would finish on ${maxDate.now}`;
-    let yourMaxEle = new ElementMakerHTML('li', yourMaxText,'list');
+      this.maxtotalHoursLeftBasedOnAvg} hours or ${this.maxWeeksLeftBasedOnMaxRecord} weeks. This means that you would finish on ${maxDate.now}`;
+    let yourMaxEle = new ElementMakerHTML('li', yourMaxText,'courseList');
     yourMaxEle.appendElementToDOM();
-  }
-
-  addMoreAccurateToDom() {
-    let moreAccurateText = `If you want a more accurate estimate and have finished both JS101 and JS109, write how many hours it took you to complete both here:`;
-    let li2 = new ElementMakerHTML('li', moreAccurateText, 'list', 'js120hours');
-    li2.appendElementToDOM();
-    let inputDiv = new ElementMakerHTML('div', '', 'list', 'inputDiv');
-    inputDiv.appendElementToDOM();
-    let input = new ElementMakerHTML('input', '', 'inputDiv', 'numberInput', '', "If you don't know, multiply avg hours per week by weeks spent studying.");
-    input.appendElementToDOM();
-    let submitButton = new ElementMakerHTML('div', 'Submit', 'inputDiv', 'js120submitbutton', 'submitbutton');
-    submitButton.appendElementToDOM();
   }
 }
 
 // gets user input
 function getUserInput() {
   if (!validateHoursPerWeekInput('hoursperweek')) return false;
-  user = new UserInput();
 
-  let date = new DateMaker(user.avgWeeks * 7);
-  user.addYourAvgToDOM(date);
+  let hoursPerWeek = Number(document.getElementById('hoursperweek').value);
+  let done = Number(document.getElementById('hoursdone').value);
+  let JS109 = Number(document.getElementById('hoursInput0').value);
+  let JS129 = Number(document.getElementById('hoursInput1').value);
+  let JS139 = Number(document.getElementById('hoursInput2').value);
+  let LS171 = Number(document.getElementById('hoursInput3').value);
+  let JS175 = Number(document.getElementById('hoursInput4').value);
+  let LS181 = Number(document.getElementById('hoursInput5').value);
+  let JS185 = Number(document.getElementById('hoursInput5').value);
+  let LS202 = Number(document.getElementById('hoursInput6').value);
+  let LS216 = Number(document.getElementById('hoursInput7').value);
+  let JS239 = Number(document.getElementById('hoursInput8').value);
 
-  let maxDate = new DateMaker(user.maxWeeks * 7);
-  user.addYourMaxEstimateToDOM(maxDate);
-  document.getElementById('submitbutton').style.display = 'none';
+  user = new UserInput(hoursPerWeek, done, JS109, JS129, JS139, LS171, JS175, LS181, JS185, LS202, LS216, JS239);
 
-  user.addMoreAccurateToDom();
-  document.getElementById('js120submitbutton').addEventListener('click', getJS120Input);
-}
+  if (JS109 > 0) {
+    launchSchoolHours.computeMoreAccurate();
+  } else {
+    let date = new DateMaker(user.weeksLeftBasedOnAvg * 7);
+    user.addYourAvgToDOM(date);
+  
+    let maxDate = new DateMaker(user.maxWeeksLeftBasedOnMaxRecord * 7);
+    user.addYourMaxEstimateToDOM(maxDate);
+  }
 
-function getJS120Input() {
-  if (!validateHoursPerWeekInput('numberInput')) return false;
-  let js120hours = Number(document.getElementById('numberInput').value);
-  launchSchoolHours.computeMoreAccurate(js120hours);
+  launchSchoolHours.addBackendAverageToDOM();
+  launchSchoolHours.addFrontendAveragetoDom();
+  launchSchoolHours.addAvgToDom();
+  launchSchoolHours.addMaxToDom();
 }
 
 function validateHoursPerWeekInput(element) {
@@ -272,27 +322,34 @@ function hideButton() {
 }
 
 function resetButton() {
-  let li = new ElementMakerHTML('div', '', 'list', 'buttonDiv');
+  let li = new ElementMakerHTML('div', '', 'moreDetails', 'buttonDiv');
   li.appendElementToDOM();
   let reset = new ElementMakerHTML('div', 'Reset', 'buttonDiv', 'resetButton', 'submitbutton');
   reset.appendElementToDOM();
   document.getElementById('resetButton').addEventListener('click', reloadPage);
 }
 
-function hideList() {
-  if (document.getElementById('hoursperweek').value) {
-    let list = document.getElementById('courseList');
-    list.style.display = 'none';
-    document.getElementById('js120submitbutton').addEventListener('click', hideButton);
-    document.getElementById('js120submitbutton').addEventListener('click', resetButton);
-    document.getElementById('js120submitbutton').addEventListener('click', scrollToBottom);
-  }
-}
-
 function reloadPage() {
   location.reload();
 }
 
-document.getElementById('submitbutton').addEventListener('click', getUserInput);
-document.getElementById('submitbutton').addEventListener('click', scrollToBottom);
-document.getElementById('submitbutton').addEventListener('click', hideList);
+function changeView() {
+  if (Number(document.getElementById('hoursperweek').value) > 0) {
+    document.getElementById('initialDiv').style.display = 'none';
+    document.getElementById('mainbody').style.display = 'grid';
+  }
+}
+
+function showDetails() {
+  document.getElementById('moreDetails').style.display = 'grid';
+}
+
+// document.getElementById('skipButton').addEventListener('click', changeView);
+document.getElementById('coursehourssubmitbutton').addEventListener('click', getUserInput);
+document.getElementById('coursehourssubmitbutton').addEventListener('click', changeView);
+document.getElementById('moredetailsbutton').addEventListener('click', showDetails);
+document.getElementById('moredetailsbutton').addEventListener('click', resetButton);
+
+// document.getElementById('submitbutton').addEventListener('click', getUserInput);
+// document.getElementById('submitbutton').addEventListener('click', scrollToBottom);
+// document.getElementById('submitbutton').addEventListener('click', hideList);
