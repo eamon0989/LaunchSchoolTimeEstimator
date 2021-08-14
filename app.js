@@ -322,7 +322,7 @@ function hideButton() {
 }
 
 function resetButton() {
-  let li = new ElementMakerHTML('div', '', 'list', 'buttonDiv');
+  let li = new ElementMakerHTML('div', '', 'moreDetails', 'buttonDiv');
   li.appendElementToDOM();
   let reset = new ElementMakerHTML('div', 'Reset', 'buttonDiv', 'resetButton', 'submitbutton');
   reset.appendElementToDOM();
@@ -334,8 +334,10 @@ function reloadPage() {
 }
 
 function changeView() {
-  document.getElementById('initialDiv').style.display = 'none';
-  document.getElementById('mainbody').style.display = 'grid';
+  if (Number(document.getElementById('hoursperweek').value) > 0) {
+    document.getElementById('initialDiv').style.display = 'none';
+    document.getElementById('mainbody').style.display = 'grid';
+  }
 }
 
 function showDetails() {
@@ -346,6 +348,7 @@ function showDetails() {
 document.getElementById('coursehourssubmitbutton').addEventListener('click', getUserInput);
 document.getElementById('coursehourssubmitbutton').addEventListener('click', changeView);
 document.getElementById('moredetailsbutton').addEventListener('click', showDetails);
+document.getElementById('moredetailsbutton').addEventListener('click', resetButton);
 
 // document.getElementById('submitbutton').addEventListener('click', getUserInput);
 // document.getElementById('submitbutton').addEventListener('click', scrollToBottom);
