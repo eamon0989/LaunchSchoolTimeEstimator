@@ -162,13 +162,10 @@ class Hours {
   }
 
   computeMoreAccurate() {
-    console.log(user);
-    console.log(launchSchoolHours);
     let computed = [];
     for (let prop in user) {
       if (prop.startsWith('JS') || prop.startsWith('LS')) {
         if (user[prop] > 0) {
-          console.log(launchSchoolHours[prop].average, user[prop]);
           computed.push(user[prop] / launchSchoolHours[prop].average);
         }
       }
@@ -207,15 +204,11 @@ class Hours {
 
     let li1 = new ElementMakerHTML('li', text1, 'questions');
     li1.appendElementToDOM();
-    // let text1 = `NOTE: Input the hours from both the course and exam unit. E.g. JS109 = JS101 + JS109.`;
 
-    // let li1 = new ElementMakerHTML('li', text1, 'inputexplanationdiv');
-    // li1.appendElementToDOM();
     let count = 0;
     for (let prop in this) {
       if (this[prop]) {
         if (this[prop].average) {
-          let text = `How many hours did it take you to finish ${prop}?`;
           let div = new ElementMakerHTML('div', '', 'questions', `hoursInputDiv${count}`, 'flexDiv');
           div.appendElementToDOM();
           let input = new ElementMakerHTML('input', '', `hoursInputDiv${count}`, `hoursInput${count}`, 'smallLiInput', `How many hours did it take you to finish ${prop}?`);
@@ -235,8 +228,10 @@ class UserInput {
     this.done = done;
     this.totalHoursLeftBasedOnAvg = launchSchoolHours.coreAverage - this.done;
     this.maxtotalHoursLeftBasedOnAvg = launchSchoolHours.coreMax - this.done;
-    this.weeksLeftBasedOnAvg = Math.round((this.totalHoursLeftBasedOnAvg / this.hours));
-    this.maxWeeksLeftBasedOnMaxRecord = Math.round((this.maxtotalHoursLeftBasedOnAvg / this.hours));
+    this.weeksLeftBasedOnAvg = Math.round((this.totalHoursLeftBasedOnAvg
+      / this.hours));
+    this.maxWeeksLeftBasedOnMaxRecord = Math.round((this.maxtotalHoursLeftBasedOnAvg
+      / this.hours));
     this.JS109 = JS109;
     this.JS129 = JS129;
     this.JS139 = JS139;
@@ -289,14 +284,15 @@ function getUserInput() {
   let LS216 = Number(document.getElementById('hoursInput7').value);
   let JS239 = Number(document.getElementById('hoursInput8').value);
 
-  user = new UserInput(hoursPerWeek, done, JS109, JS129, JS139, LS171, JS175, LS181, JS185, LS202, LS216, JS239);
+  user = new UserInput(hoursPerWeek, done, JS109, JS129, JS139, LS171,
+    JS175, LS181, JS185, LS202, LS216, JS239);
 
   if (JS109 > 0) {
     launchSchoolHours.computeMoreAccurate();
   } else {
     let date = new DateMaker(user.weeksLeftBasedOnAvg * 7);
     user.addYourAvgToDOM(date);
-  
+
     let maxDate = new DateMaker(user.maxWeeksLeftBasedOnMaxRecord * 7);
     user.addYourMaxEstimateToDOM(maxDate);
   }
@@ -318,13 +314,13 @@ function validateHoursPerWeekInput(element) {
   return true;
 }
 
-function scrollToBottom() {
-  window.scrollTo(0, document.body.scrollHeight);
-}
+// function scrollToBottom() {
+//   window.scrollTo(0, document.body.scrollHeight);
+// }
 
-function hideButton() {
-  document.getElementById('js120submitbutton').style.display = 'none';
-}
+// function hideButton() {
+//   document.getElementById('js120submitbutton').style.display = 'none';
+// }
 
 function resetButton() {
   let li = new ElementMakerHTML('div', '', 'resetButtonDiv', 'buttonDiv');
@@ -367,6 +363,7 @@ document.getElementById('notfinished').addEventListener('click', showSubmitButto
 document.getElementById('coursehourssubmitbutton').addEventListener('click', getUserInput);
 document.getElementById('coursehourssubmitbutton').addEventListener('click', changeView);
 document.getElementById('moredetailsbutton').addEventListener('click', showDetails);
+
 // document.getElementById('moredetailsbutton').addEventListener('click', resetButton);
 
 // document.getElementById('submitbutton').addEventListener('click', getUserInput);
