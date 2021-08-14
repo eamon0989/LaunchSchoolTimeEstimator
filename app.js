@@ -381,3 +381,5 @@ document.getElementById('moredetailsbutton').addEventListener('click', hideDetai
 // document.getElementById('submitbutton').addEventListener('click', getUserInput);
 // document.getElementById('submitbutton').addEventListener('click', scrollToBottom);
 // document.getElementById('submitbutton').addEventListener('click', hideList);
+
+// testing changes for git example 
