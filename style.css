@@ -82,6 +82,15 @@ body {
   margin-left: 2px;
 }
 
+#mainbody {
+  grid-column: 2;
+}
+
+#moreDetails {
+  display: none;
+  grid-column: 2;
+}
+
 .yesnosubmitbutton {
   display: flex;
   border-radius: 3px;
