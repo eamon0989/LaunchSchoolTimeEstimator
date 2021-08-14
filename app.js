@@ -357,12 +357,17 @@ function showSubmitButton() {
   document.getElementById('submitInnerDiv').style.display = 'flex';
 }
 
+function hideDetailsButton() {
+  document.getElementById('list').style.display = 'none';
+}
+
 // document.getElementById('skipButton').addEventListener('click', changeView);
 document.getElementById('yesfinished').addEventListener('click', showInputField);
 document.getElementById('notfinished').addEventListener('click', showSubmitButton);
 document.getElementById('coursehourssubmitbutton').addEventListener('click', getUserInput);
 document.getElementById('coursehourssubmitbutton').addEventListener('click', changeView);
 document.getElementById('moredetailsbutton').addEventListener('click', showDetails);
+document.getElementById('moredetailsbutton').addEventListener('click', hideDetailsButton);
 
 // document.getElementById('moredetailsbutton').addEventListener('click', resetButton);
 
