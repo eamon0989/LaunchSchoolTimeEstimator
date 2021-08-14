@@ -161,7 +161,9 @@ h1 {
   text-align: center;
   font-size: 2.3rem;
   padding: 1.5rem;
-  background-color: #f6f6f6;
+  background-color: #4d4d4d;
+  color: #FFFFFF;
+  border-radius: 4px;
 }
 
 form {
@@ -177,15 +179,15 @@ button,
   border-radius: 3px;
   outline: none;
   border: 1px solid #ccc;
-  background-color: #f6f6f6;
+  background-color: rgb(232, 240, 254);
   cursor: pointer;
   /* width: 15%; */
-  padding: 1rem;
+  padding: 1rem 1.4rem;
 }
 
 button:hover,
 .submitbutton:hover {
-  background-color: #2f94fa9d;
+  background-color: rgb(174, 191, 219);
 }
 
 #listdiv {
@@ -207,6 +209,10 @@ input {
   border: 1px solid #ccc;
   transition: all 0.3s ease;
   width: 100%;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px rgb(255, 255, 255) inset;
 }
 
 input:focus {
@@ -262,7 +268,7 @@ li:hover {
   justify-content: center;
   align-items: center;
   width: 3.5rem;
-  background-color: #ff6b6b;
+  background-color: #f25858;
   border-radius: 3px;
   outline: none;
   border: 1px solid #ccc;
@@ -280,12 +286,12 @@ li:hover {
   display: grid;
 }
 
-#reset {
+#resetButton {
   padding: 1rem;
 }
 
-#reset:hover {
-  background-color: #ff6b6b;
+#resetButton:hover {
+  background-color: #f25858;
 }
 
 @keyframes slideOut {
@@ -322,6 +328,6 @@ li:hover {
 }
 
 #resetButton {
-  background-color: #ff6b6b;
+  background-color: #ff7575;
   padding-inline: 1.5rem;
 }
