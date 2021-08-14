@@ -45,13 +45,13 @@ class Hours {
     this.JS109 = { hours: [190, 149, 307, 113, 102, 165, 78] };
     this.JS129 = { hours: [115, 175, 85, 131, 63, 87, 95, 90] };
     this.JS139 = { hours: [55, 80, 155, 69, 60, 36, 50, 58] };
-    this.JS171 = { hours: [30, 26, 30, 38, 17, 35, 37, 9] };
+    this.LS171 = { hours: [30, 26, 30, 38, 17, 35, 37, 9] };
     this.JS175 = { hours: [30, 73, 90, 58, 24, 76, 35, 52] };
     this.LS181 = { hours: [83, 49, 48, 58, 25, 27, 51, 51] };
     this.JS185 = { hours: [8, 10, 15, 15, 7, 12, 10, 16] };
     this.LS202 = { hours: [78, 55, 160, 46, 92, 38] };
     this.LS216 = { hours: [75, 66, 60, 105, 52, 89, 77, 73] };
-    this.LS239 = { hours: [212, 245, 91, 187, 187, 192, 172, 136] };
+    this.JS239 = { hours: [212, 245, 91, 187, 187, 192, 172, 136] };
     this.getMaxOfCourse();
     this.getCoreAverage();
     this.getBackendAverage();
