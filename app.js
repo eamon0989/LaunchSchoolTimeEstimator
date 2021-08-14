@@ -198,12 +198,15 @@ class Hours {
   }
 
   addCompletedCoursesQuestionsToDOM() {
-    let text = `If you have finished any of the following courses, please input how many hours it took you. Leave any courses you have NOT yet finished empty. 
-    
-    Input the hours from both the course and exam unit. E.g. JS109 = JS101 + JS109.`;
+    let text = `If you have finished any of the following courses, please input how many hours it took you to complete both the course and the exams. e.g. JS109 = JS101 + JS109. `;
 
     let li = new ElementMakerHTML('li', text, 'questions');
     li.appendElementToDOM();
+
+    let text1 = `Leave any courses you have not yet finished empty. If you don't know your hours just click submit.`;
+
+    let li1 = new ElementMakerHTML('li', text1, 'questions');
+    li1.appendElementToDOM();
     // let text1 = `NOTE: Input the hours from both the course and exam unit. E.g. JS109 = JS101 + JS109.`;
 
     // let li1 = new ElementMakerHTML('li', text1, 'inputexplanationdiv');
