@@ -47,6 +47,15 @@ body {
   display: none;
 }
 
+#questions {
+  display: none;
+  /* grid-column: 2; */
+}
+
+#submitInnerDiv {
+  display: none;
+}
+
 #wrapper {
   grid-column: 2;
 }
