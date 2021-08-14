@@ -34,7 +34,9 @@ class DateMaker {
   constructor(days) {
     this.now = new Date();
     this.now.setDate(this.now.getDate() + days);
-    this.now = this.now.toDateString();
+    this.now = this.now.toLocaleDateString('en-US', {
+      weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'
+    });
   }
 }
 
