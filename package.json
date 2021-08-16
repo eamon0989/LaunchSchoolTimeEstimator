@@ -1,0 +1,23 @@
+{
+  "name": "lstimeestimate",
+  "version": "3.0.0",
+  "description": "Estimate how long it will take you to finish LS",
+  "main": "app.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eamon0989/LaunchSchoolTimeEstimator.git"
+  },
+  "keywords": [
+    "Launch",
+    "School"
+  ],
+  "author": "Eamon O'Callaghan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eamon0989/LaunchSchoolTimeEstimator/issues"
+  },
+  "homepage": "https://github.com/eamon0989/LaunchSchoolTimeEstimator#readme"
+}
