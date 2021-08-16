@@ -1,14 +1,5 @@
-/* * Class representing an HTML Element */
+// Create DOM elements
 class ElementMakerHTML {
-  /**
-   * Create and initialize an new HTML element
-   * @param {string} elementType - the type of element to be created. e.g. <li></li> (list item)
-   * @param {string} text - The text to be embedded in the html element e.g. <li>JS101 takes...</li>
-   * @param {string} parentElement - the parent element the child element belongs to e.g. <ul><li></li></ul>
-   * @param {string} id - the CSS id for that html element e.g. <ul id="courseList">
-   * @param {string} className - the CSS class name for an html element e.g. <button class="submitbutton">
-   * @param {string} placeholder - the place holder text for an element e.g. <input placeholder="How many...">
-   */
   constructor(elementType, text, parentElement, id, className, placeholder) {
     this.ele = document.createElement(elementType);
     if (text) {
@@ -22,9 +13,9 @@ class ElementMakerHTML {
     if (placeholder) this.ele.placeholder = placeholder;
   }
 
-  /**
-   * Append the newly created HTML element to DOM tree
-   */
+
+  // Append the newly created HTML element to DOM tree
+
   appendElementToDOM() {
     this.parentElement.appendChild(this.ele);
   }
@@ -34,7 +25,9 @@ class DateMaker {
   constructor(days) {
     this.now = new Date();
     this.now.setDate(this.now.getDate() + days);
-    this.now = this.now.toDateString();
+    this.now = this.now.toLocaleDateString('en-US', {
+      weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'
+    });
   }
 }
 
@@ -190,10 +183,6 @@ class Hours {
     yourAvgEle.appendElementToDOM();
   }
 
-  computeMoreAccurateBasedOnCourseHours() {
-
-  }
-
   addCompletedCoursesQuestionsToDOM() {
     let text = `If you have finished any of the following courses, please input how many hours it took you to complete both the course and the exams. e.g. JS109 = JS101 + JS109. `;
 
@@ -244,14 +233,6 @@ class UserInput {
     this.JS239 = JS239;
   }
 
-  getHoursPerWeek() {
-    return Number(document.getElementById('hoursperweek').value);
-  }
-
-  getTotalHoursDone() {
-    return Number(document.getElementById('hoursdone').value);
-  }
-
   addYourAvgToDOM(date) {
     let yourAvgText = `Based on the average it will probably take you another ${
       this.totalHoursLeftBasedOnAvg} hours. At ${user.hours} hours per week it would take you around ${this.weeksLeftBasedOnAvg} weeks. This means that you would finish on ${date.now}`;
@@ -267,7 +248,10 @@ class UserInput {
   }
 }
 
-// gets user input
+function getUserValue(input) {
+  return Number(document.getElementById(input).value)
+}
+
 function getUserInput() {
   if (!validateHoursPerWeekInput('hoursperweek')) {
     let error = new ElementMakerHTML('li', 'Please insert a valid number.','line1', 'errormessage');
@@ -279,18 +263,18 @@ function getUserInput() {
     return false;
   } 
 
-  let hoursPerWeek = Number(document.getElementById('hoursperweek').value);
-  let done = Number(document.getElementById('hoursdone').value);
-  let JS109 = Number(document.getElementById('hoursInput0').value);
-  let JS129 = Number(document.getElementById('hoursInput1').value);
-  let JS139 = Number(document.getElementById('hoursInput2').value);
-  let LS171 = Number(document.getElementById('hoursInput3').value);
-  let JS175 = Number(document.getElementById('hoursInput4').value);
-  let LS181 = Number(document.getElementById('hoursInput5').value);
-  let JS185 = Number(document.getElementById('hoursInput5').value);
-  let LS202 = Number(document.getElementById('hoursInput6').value);
-  let LS216 = Number(document.getElementById('hoursInput7').value);
-  let JS239 = Number(document.getElementById('hoursInput8').value);
+  let hoursPerWeek = getUserValue('hoursperweek')
+  let done = getUserValue('hoursdone')
+  let JS109 = getUserValue('hoursInput0')
+  let JS129 = getUserValue('hoursInput1')
+  let JS139 = getUserValue('hoursInput2')
+  let LS171 = getUserValue('hoursInput3')
+  let JS175 = getUserValue('hoursInput4')
+  let LS181 = getUserValue('hoursInput5')
+  let JS185 = getUserValue('hoursInput5')
+  let LS202 = getUserValue('hoursInput6')
+  let LS216 = getUserValue('hoursInput7')
+  let JS239 = getUserValue('hoursInput8')
 
   user = new UserInput(hoursPerWeek, done, JS109, JS129, JS139, LS171,
     JS175, LS181, JS185, LS202, LS216, JS239);
@@ -312,7 +296,7 @@ function getUserInput() {
 }
 
 function validateHoursPerWeekInput(element) {
-  let input = Number(document.getElementById(element).value);
+  let input = getUserValue(element);
 
   if (Number.isNaN(input) || input <= 0) {
     return false;
@@ -321,65 +305,58 @@ function validateHoursPerWeekInput(element) {
   return true;
 }
 
-// function scrollToBottom() {
-//   window.scrollTo(0, document.body.scrollHeight);
-// }
-
-// function hideButton() {
-//   document.getElementById('js120submitbutton').style.display = 'none';
-// }
-
 function resetButton() {
   let li = new ElementMakerHTML('div', '', 'resetButtonDiv', 'buttonDiv');
   li.appendElementToDOM();
   let reset = new ElementMakerHTML('div', 'Reset', 'buttonDiv', 'resetButton', 'submitbutton');
   reset.appendElementToDOM();
-  document.getElementById('resetButton').addEventListener('click', reloadPage);
+  eventListener('resetButton',reloadPage);
 }
 
 function reloadPage() {
   location.reload();
 }
 
+function changeDisplay(id,style) {
+  document.getElementById(id).style.display = style;
+}
+
 function changeView() {
-  if (Number(document.getElementById('hoursperweek').value) > 0 && Number(document.getElementById('hoursdone').value) > 0) {
-    document.getElementById('initialDiv').style.display = 'none';
-    document.getElementById('mainbody').style.display = 'grid';
+  if (getUserValue('hoursperweek') > 0 && getUserValue('hoursdone') > 0) {
+    changeDisplay('initialDiv', 'none');
+    changeDisplay('mainbody', 'grid');
     resetButton();
   }
 }
 
 function showDetails() {
-  document.getElementById('moreDetails').style.display = 'grid';
+  changeDisplay('moreDetails','grid');
 }
 
 function showInputField() {
-  document.getElementById('questions').style.display = 'block';
-  document.getElementById('submitInnerDiv').style.display = 'flex';
-  document.getElementById('haveyoufinishedjs109').style.display = 'none';
+  changeDisplay('questions','block');
+  changeDisplay('submitInnerDiv','flex');
+  changeDisplay('haveyoufinishedjs109', 'none');
 }
 
 function showSubmitButton() {
-  document.getElementById('haveyoufinishedjs109').style.display = 'none';
-  document.getElementById('submitInnerDiv').style.display = 'flex';
+  changeDisplay('haveyoufinishedjs109', 'none')
+  changeDisplay('submitInnerDiv','flex');
 }
 
 function hideDetailsButton() {
-  document.getElementById('list').style.display = 'none';
+  changeDisplay('list', 'none');
 }
 
-// document.getElementById('skipButton').addEventListener('click', changeView);
-document.getElementById('yesfinished').addEventListener('click', showInputField);
-document.getElementById('notfinished').addEventListener('click', showSubmitButton);
-document.getElementById('coursehourssubmitbutton').addEventListener('click', getUserInput);
-document.getElementById('coursehourssubmitbutton').addEventListener('click', changeView);
-document.getElementById('moredetailsbutton').addEventListener('click', showDetails);
-document.getElementById('moredetailsbutton').addEventListener('click', hideDetailsButton);
 
-// document.getElementById('moredetailsbutton').addEventListener('click', resetButton);
+function eventListener(id,callback) {
+  document.getElementById(id).addEventListener('click',callback);
+}
 
-// document.getElementById('submitbutton').addEventListener('click', getUserInput);
-// document.getElementById('submitbutton').addEventListener('click', scrollToBottom);
-// document.getElementById('submitbutton').addEventListener('click', hideList);
-
-// testing changes for git example. More tests
+eventListener('moredetailsbutton',showDetails);
+eventListener('yesfinished',showInputField);
+eventListener('notfinished',showSubmitButton);
+eventListener('notfinished',showSubmitButton);
+eventListener('coursehourssubmitbutton',getUserInput);
+eventListener('coursehourssubmitbutton',changeView);
+eventListener('coursehourssubmitbutton',hideDetailsButton);
