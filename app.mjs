@@ -21,11 +21,11 @@ function getUserValue(input) {
 }
 
 function getUserInput() {
-  if (!validateHoursPerWeekInput('hoursperweek')) {
+  if (!validateUserInput('hoursperweek')) {
     let error = new ElementMakerHTML('li', 'Please insert a valid number.','line1', 'errormessage');
     error.appendElementToDOM();
     return false;
-  } else if (!validateHoursPerWeekInput('hoursdone')) {
+  } else if (!validateUserInput('hoursdone')) {
     let error = new ElementMakerHTML('li', 'Please insert a valid number.','line2', 'errormessage');
     error.appendElementToDOM();
     return false;
@@ -63,7 +63,7 @@ function getUserInput() {
   launchSchoolHours.addMaxToDom();
 }
 
-function validateHoursPerWeekInput(element) {
+function validateUserInput(element) {
   let input = getUserValue(element);
 
   if (Number.isNaN(input) || input <= 0) {
@@ -78,7 +78,7 @@ function resetButton() {
   li.appendElementToDOM();
   let reset = new ElementMakerHTML('div', 'Reset', 'buttonDiv', 'resetButton', 'submitbutton');
   reset.appendElementToDOM();
-  eventListener('resetButton',reloadPage);
+  clickEventListener('resetButton', reloadPage);
 }
 
 function reloadPage() {
@@ -116,18 +116,29 @@ function hideDetailsButton() {
   changeDisplay('list', 'none');
 }
 
-
-function eventListener(id,callback) {
-  document.getElementById(id).addEventListener('click',callback);
+function clickEventListener(id, callback) {
+  document.getElementById(id).addEventListener('click', callback);
 }
 
-eventListener('moredetailsbutton',showDetails);
-eventListener('yesfinished',showInputField);
-eventListener('notfinished',showSubmitButton);
-eventListener('notfinished',showSubmitButton);
-eventListener('coursehourssubmitbutton',getUserInput);
-eventListener('coursehourssubmitbutton',changeView);
-eventListener('coursehourssubmitbutton',hideDetailsButton);
+function enterEventListener(id, callback) {
+  function checkKeyType(event) {
+    if (event.code === 'Enter') callback();
+  }
+
+  document.getElementById(id).addEventListener('keyup', checkKeyType);
+}
+
+clickEventListener('moredetailsbutton', showDetails);
+enterEventListener('moredetailsbutton', showDetails);
+clickEventListener('yesfinished', showInputField);
+clickEventListener('notfinished', showSubmitButton);
+clickEventListener('coursehourssubmitbutton', getUserInput);
+clickEventListener('coursehourssubmitbutton', changeView);
+clickEventListener('coursehourssubmitbutton', hideDetailsButton);
+enterEventListener('initialform', showInputField);
+enterEventListener('questions', getUserInput);
+enterEventListener('questions', changeView);
+enterEventListener('questions', hideDetailsButton);
 
 // export default launchSchoolHours;
 // export default user;
