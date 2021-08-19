@@ -35,11 +35,9 @@ function getUserInput() {
   })
 
   computeNumbers(idObj)
-  
 }
 
 function computeNumbers(idObj) {
-
   user = new UserInput(idObj);
 
   if (idObj.JS109 > 0) {
