@@ -126,7 +126,6 @@ class Listener {
   }
 
   pressEnter(id, ...callbacks) {
-    if (!id && this.id) id = this.id;
     let element = document.getElementById(id);
 
     const checkKeyType = (event) => {
