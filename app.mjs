@@ -120,8 +120,7 @@ class Listener {
   click(id, ...callbacks) {
     let element = document.getElementById(id);
     element.addEventListener('click', () => {
-      if (callbacks.length < 2) callbacks[0]();
-      else callbacks.forEach(callback => callback());
+      callbacks.forEach(callback => callback());
     });
   }
 
@@ -130,8 +129,7 @@ class Listener {
 
     const checkKeyType = (event) => {
       if (event.code === 'Enter') {
-        if (callbacks.length < 2) callbacks[0]();
-        else callbacks.forEach(callback => callback());
+        callbacks.forEach(callback => callback());
       };
     };
     
