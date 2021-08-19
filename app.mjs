@@ -78,7 +78,7 @@ function resetButton() {
   li.appendElementToDOM();
   let reset = new ElementMakerHTML('div', 'Reset', 'buttonDiv', 'resetButton', 'submitbutton');
   reset.appendElementToDOM();
-  clickEventListener('resetButton', reloadPage);
+  listenFor.click('resetButton', reloadPage);
 }
 
 function reloadPage() {
@@ -116,29 +116,37 @@ function hideDetailsButton() {
   changeDisplay('list', 'none');
 }
 
-function clickEventListener(id, callback) {
-  document.getElementById(id).addEventListener('click', callback);
-}
-
-function enterEventListener(id, callback) {
-  function checkKeyType(event) {
-    if (event.code === 'Enter') callback();
+class Listener {
+  click(id, ...callbacks) {
+    let element = document.getElementById(id);
+    element.addEventListener('click', () => {
+      callbacks.forEach(callback => callback());
+    });
   }
 
-  document.getElementById(id).addEventListener('keyup', checkKeyType);
+  pressEnter(id, ...callbacks) {
+    let element = document.getElementById(id);
+
+    const checkKeyType = (event) => {
+      if (event.code === 'Enter') {
+        callbacks.forEach(callback => callback());
+      };
+    };
+    
+
+    element.addEventListener('keyup', checkKeyType);
+  }
 }
 
-clickEventListener('moredetailsbutton', showDetails);
-enterEventListener('moredetailsbutton', showDetails);
-clickEventListener('yesfinished', showInputField);
-clickEventListener('notfinished', showSubmitButton);
-clickEventListener('coursehourssubmitbutton', getUserInput);
-clickEventListener('coursehourssubmitbutton', changeView);
-clickEventListener('coursehourssubmitbutton', hideDetailsButton);
-enterEventListener('initialform', showInputField);
-enterEventListener('questions', getUserInput);
-enterEventListener('questions', changeView);
-enterEventListener('questions', hideDetailsButton);
+const listenFor = new Listener();
+
+listenFor.click('moredetailsbutton', showDetails)
+listenFor.pressEnter('moredetailsbutton', showDetails);
+listenFor.click('yesfinished', showInputField);
+listenFor.click('notfinished', showSubmitButton);
+listenFor.pressEnter('initialform', showInputField);
+listenFor.click('coursehourssubmitbutton', getUserInput, changeView, hideDetailsButton);
+listenFor.pressEnter('questions', getUserInput, changeView, hideDetailsButton);
 
 // export default launchSchoolHours;
 // export default user;
