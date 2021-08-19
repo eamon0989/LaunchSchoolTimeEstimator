@@ -21,15 +21,8 @@ function getUserValue(input) {
 }
 
 function getUserInput() {
-  if (!validateUserInput('hoursperweek')) {
-    let error = new ElementMakerHTML('li', 'Please insert a valid number.','line1', 'errormessage');
-    error.appendElementToDOM();
-    return false;
-  } else if (!validateUserInput('hoursdone')) {
-    let error = new ElementMakerHTML('li', 'Please insert a valid number.','line2', 'errormessage');
-    error.appendElementToDOM();
-    return false;
-  } 
+  if (!validate('hoursperweek','line1')) return false
+  if (!validate('hoursdone','line2')) return false
 
   let arr = ['JS109','JS129','JS139','LS171','JS175','LS181','JS185','LS202','LS216','JS239']
   let idObj = {
@@ -41,6 +34,10 @@ function getUserInput() {
     idObj[elem] = getUserValue(`hoursInput${index}`)
   })
 
+  computeNumbers(idObj)
+}
+
+function computeNumbers(idObj) {
   user = new UserInput(idObj);
 
   if (idObj.JS109 > 0) {
@@ -59,7 +56,16 @@ function getUserInput() {
   launchSchoolHours.addMaxToDom();
 }
 
-function validateUserInput(element) {
+function validate(id,line) {
+  if (!validateHoursPerWeekInput(id)) {
+    let error = new ElementMakerHTML('li', 'Please insert a valid number.',line, 'errormessage');
+    error.appendElementToDOM();
+    return false;
+  } 
+  return true;
+}
+
+function validateHoursPerWeekInput(element) {
   let input = getUserValue(element);
 
   if (Number.isNaN(input) || input <= 0) {
@@ -74,7 +80,7 @@ function resetButton() {
   li.appendElementToDOM();
   let reset = new ElementMakerHTML('div', 'Reset', 'buttonDiv', 'resetButton', 'submitbutton');
   reset.appendElementToDOM();
-  listenFor.click('resetButton', reloadPage);
+  eventListener('resetButton',reloadPage);
 }
 
 function reloadPage() {
@@ -112,37 +118,18 @@ function hideDetailsButton() {
   changeDisplay('list', 'none');
 }
 
-class Listener {
-  click(id, ...callbacks) {
-    let element = document.getElementById(id);
-    element.addEventListener('click', () => {
-      callbacks.forEach(callback => callback());
-    });
-  }
 
-  pressEnter(id, ...callbacks) {
-    let element = document.getElementById(id);
-
-    const checkKeyType = (event) => {
-      if (event.code === 'Enter') {
-        callbacks.forEach(callback => callback());
-      };
-    };
-    
-
-    element.addEventListener('keyup', checkKeyType);
-  }
+function eventListener(id,callback) {
+  document.getElementById(id).addEventListener('click',callback);
 }
 
-const listenFor = new Listener();
-
-listenFor.click('moredetailsbutton', showDetails)
-listenFor.pressEnter('moredetailsbutton', showDetails);
-listenFor.click('yesfinished', showInputField);
-listenFor.click('notfinished', showSubmitButton);
-listenFor.pressEnter('initialform', showInputField);
-listenFor.click('coursehourssubmitbutton', getUserInput, changeView, hideDetailsButton);
-listenFor.pressEnter('questions', getUserInput, changeView, hideDetailsButton);
+eventListener('moredetailsbutton',showDetails);
+eventListener('yesfinished',showInputField);
+eventListener('notfinished',showSubmitButton);
+eventListener('notfinished',showSubmitButton);
+eventListener('coursehourssubmitbutton',getUserInput);
+eventListener('coursehourssubmitbutton',changeView);
+eventListener('coursehourssubmitbutton',hideDetailsButton);
 
 // export default launchSchoolHours;
 // export default user;
