@@ -21,15 +21,7 @@ function getUserValue(input) {
 }
 
 function getUserInput() {
-  if (!validateUserInput('hoursperweek')) {
-    let error = new ElementMakerHTML('li', 'Please insert a valid number.','line1', 'errormessage');
-    error.appendElementToDOM();
-    return false;
-  } else if (!validateUserInput('hoursdone')) {
-    let error = new ElementMakerHTML('li', 'Please insert a valid number.','line2', 'errormessage');
-    error.appendElementToDOM();
-    return false;
-  } 
+  if (!validate('hoursperweek','line1') || !validate('hoursdone','line2')) return false
 
   let arr = ['JS109','JS129','JS139','LS171','JS175','LS181','JS185','LS202','LS216','JS239']
   let idObj = {
@@ -41,6 +33,10 @@ function getUserInput() {
     idObj[elem] = getUserValue(`hoursInput${index}`)
   })
 
+  computeNumbers(idObj)
+}
+
+function computeNumbers(idObj) {
   user = new UserInput(idObj);
 
   if (idObj.JS109 > 0) {
@@ -59,6 +55,14 @@ function getUserInput() {
   launchSchoolHours.addMaxToDom();
 }
 
+function validate(id,line) {
+  if (!validateHoursPerWeekInput(id)) {
+    let error = new ElementMakerHTML('li', 'Please insert a valid number.',line, 'errormessage');
+    error.appendElementToDOM();
+    return false;
+  } 
+  return true;
+}
 function validateUserInput(element) {
   let input = getUserValue(element);
 
