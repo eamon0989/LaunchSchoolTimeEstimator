@@ -21,8 +21,7 @@ function getUserValue(input) {
 }
 
 function getUserInput() {
-  if (!validate('hoursperweek','line1')) return false
-  if (!validate('hoursdone','line2')) return false
+  if (!validate('hoursperweek','line1') || !validate('hoursdone','line2')) return false
 
   let arr = ['JS109','JS129','JS139','LS171','JS175','LS181','JS185','LS202','LS216','JS239']
   let idObj = {
