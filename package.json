@@ -4,7 +4,7 @@
   "description": "Estimate how long it will take you to finish LS",
   "main": "app.mjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "babel": "babel lib --out-dir dist --presets=@babel/preset-env"
   },
   "repository": {
     "type": "git",
@@ -19,5 +19,11 @@
   "bugs": {
     "url": "https://github.com/eamon0989/LaunchSchoolTimeEstimator/issues"
   },
-  "homepage": "https://github.com/eamon0989/LaunchSchoolTimeEstimator#readme"
+  "homepage": "https://github.com/eamon0989/LaunchSchoolTimeEstimator#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.14.8",
+    "@babel/core": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
+    "jest": "^27.0.6"
+  }
 }
