@@ -21,33 +21,25 @@ function getUserValue(input) {
 }
 
 function getUserInput() {
-  if (!validateUserInput('hoursperweek')) {
-    let error = new ElementMakerHTML('li', 'Please insert a valid number.','line1', 'errormessage');
-    error.appendElementToDOM();
-    return false;
-  } else if (!validateUserInput('hoursdone')) {
-    let error = new ElementMakerHTML('li', 'Please insert a valid number.','line2', 'errormessage');
-    error.appendElementToDOM();
-    return false;
-  } 
+  if (!validate('hoursperweek','line1') || !validate('hoursdone','line2')) return false
 
-  let hoursPerWeek = getUserValue('hoursperweek')
-  let done = getUserValue('hoursdone')
-  let JS109 = getUserValue('hoursInput0')
-  let JS129 = getUserValue('hoursInput1')
-  let JS139 = getUserValue('hoursInput2')
-  let LS171 = getUserValue('hoursInput3')
-  let JS175 = getUserValue('hoursInput4')
-  let LS181 = getUserValue('hoursInput5')
-  let JS185 = getUserValue('hoursInput5')
-  let LS202 = getUserValue('hoursInput6')
-  let LS216 = getUserValue('hoursInput7')
-  let JS239 = getUserValue('hoursInput8')
+  let arr = ['JS109','JS129','JS139','LS171','JS175','LS181','JS185','LS202','LS216','JS239']
+  let idObj = {
+    'hoursPerWeek':getUserValue('hoursperweek'),
+    'done': getUserValue('hoursdone')
+  }
 
-  user = new UserInput(hoursPerWeek, done, JS109, JS129, JS139, LS171,
-    JS175, LS181, JS185, LS202, LS216, JS239);
+  arr.forEach((elem,index) => {
+    idObj[elem] = getUserValue(`hoursInput${index}`)
+  })
 
-  if (JS109 > 0) {
+  computeNumbers(idObj)
+}
+
+function computeNumbers(idObj) {
+  user = new UserInput(idObj);
+
+  if (idObj.JS109 > 0) {
     launchSchoolHours.computeMoreAccurate();
   } else {
     let date = new DateMaker(user.weeksLeftBasedOnAvg * 7);
@@ -61,6 +53,15 @@ function getUserInput() {
   launchSchoolHours.addFrontendAveragetoDom();
   launchSchoolHours.addAvgToDom();
   launchSchoolHours.addMaxToDom();
+}
+
+function validate(id,line) {
+  if (!validateUserInput(id)) {
+    let error = new ElementMakerHTML('li', 'Please insert a valid number.',line, 'errormessage');
+    error.appendElementToDOM();
+    return false;
+  } 
+  return true;
 }
 
 function validateUserInput(element) {
