@@ -18,8 +18,17 @@ body {
   grid-template-columns: 1fr min(70ch, calc(100% - 16px)) 1fr;
 }
 
+ul {
+  margin: 0px;
+}
+
+li {
+  margin: 0px;
+}
+
 #mainbody {
   display: none;
+  margin-bottom: -1px;
 }
 
 #questions {
@@ -78,6 +87,7 @@ body {
 #moreDetails {
   display: none;
   grid-column: 2;
+  margin-top: -1px;
 }
 
 .yesnosubmitbutton {
@@ -85,11 +95,8 @@ body {
   border-radius: 3px;
   outline: none;
   border: 1px solid #ccc;
-  /* background-color: #f6f6f6; */
   cursor: pointer;
-  /* width: 15%; */
   padding: 1rem 1.5rem;
-  /* margin: 1px; */
 }
 
 .smallLi {
@@ -101,6 +108,7 @@ body {
   overflow: hidden;
   border-radius: 3px;
   flex-grow: 2;
+  margin: 0;
 }
 
 .innerLi {
@@ -183,7 +191,6 @@ input {
   border-radius: 3px;
   border: 1px solid #ccc;
   transition: all 0.3s ease;
-  /* width: 100%; */
 }
 
 input:-webkit-autofill {
